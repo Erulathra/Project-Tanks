@@ -1,2 +1,1 @@
-*.png filter=lfs diff=lfs merge=lfs -text
 Assets/Map/Materials/Sandbox/Sand_Textures/Ground033_4K_Normal.png filter=lfs diff=lfs merge=lfs -text
