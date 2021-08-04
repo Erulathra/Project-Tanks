@@ -38,29 +38,34 @@ namespace Tank.Scripts
 
 		public void HandleMotor()
 		{
-			if (gamepad.IsBreaking) return;
+			if (IsBreaking()) return;
 			if (tankRigidBody.velocity.magnitude > maxSpeed) return;
-
-			var acceleration = gamepad.AccelerateFront - gamepad.AccelerateBack;
-			BrakeWhenAccelerateInAnotherDirection(acceleration);
-			if (isBreaking) return;
-
-			frontRightWheel.motorTorque = motorForce * acceleration;
-			frontLeftWheel.motorTorque = motorForce * acceleration;
+			
+			var actualMotorForce = motorForce * Acceleration();
+			frontRightWheel.motorTorque = actualMotorForce;
+			frontLeftWheel.motorTorque = actualMotorForce;
 		}
 
+		private bool IsBreaking()
+		{
+			return isBreaking || gamepad.IsBreaking;
+		}
+
+		private float Acceleration()
+		{
+			return gamepad.AccelerateFront - gamepad.AccelerateBack;
+		}
+		
 		private void BrakeWhenAccelerateInAnotherDirection(float acceleration)
 		{
 			var velocity = tankRigidBody.transform.InverseTransformDirection(tankRigidBody.velocity);
-			var isAccelerationInOppositeDirection =
-				acceleration < 0 && velocity.z > 0.2f || acceleration > 0 && velocity.z < -0.2f;
-
-			isBreaking = isAccelerationInOppositeDirection;
+			isBreaking = (acceleration < 0 && velocity.z > 0.2f) || (acceleration > 0 && velocity.z < -0.2f);
 		}
 
 		public void HandleBreaking()
 		{
-			ApplyBreaking(isBreaking || gamepad.IsBreaking ? breakingForce : 0f);
+			BrakeWhenAccelerateInAnotherDirection(Acceleration());
+			ApplyBreaking(IsBreaking() ? breakingForce : 0f);
 		}
 
 		private void ApplyBreaking(float force)

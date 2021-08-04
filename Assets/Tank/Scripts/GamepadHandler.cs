@@ -20,13 +20,7 @@ namespace Tank.Scripts
 		{
 			SetControls();
 		}
-
-		private void Update()
-		{
-			if (MoveVector.magnitude < rightAnalogDeadZone) MoveVector = Vector2.zero;
-			if (AimVector.magnitude < leftAnalogDeadZone) AimVector = Vector2.zero;
-		}
-
+		
 		private void OnEnable()
 		{
 			tankKeyMap.General.Enable();
@@ -41,8 +35,18 @@ namespace Tank.Scripts
 		{
 			tankKeyMap = new TankKeyMap();
 
-			tankKeyMap.General.Move.performed += ctx => MoveVector = ctx.ReadValue<Vector2>();
-			tankKeyMap.General.Aim.performed += ctx => AimVector = ctx.ReadValue<Vector2>();
+			tankKeyMap.General.Move.performed += ctx =>
+			{
+				MoveVector = ctx.ReadValue<Vector2>();
+				if (MoveVector.magnitude < rightAnalogDeadZone) MoveVector = Vector2.zero;
+			};
+			
+			tankKeyMap.General.Aim.performed += ctx =>
+			{
+				AimVector = ctx.ReadValue<Vector2>();
+				if (AimVector.magnitude < leftAnalogDeadZone) AimVector = Vector2.zero;
+			};
+			
 			tankKeyMap.General.AccelerateFront.performed += ctx => AccelerateFront = ctx.ReadValue<float>();
 			tankKeyMap.General.AccelerateBack.performed += ctx => AccelerateBack = ctx.ReadValue<float>();
 			tankKeyMap.General.HandBrake.performed += _ => IsBreaking = true;
