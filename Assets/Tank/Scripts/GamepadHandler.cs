@@ -1,7 +1,9 @@
 using UnityEngine;
 
-namespace Tank.Scripts {
-	public class GamepadHandler : MonoBehaviour {
+namespace Tank.Scripts
+{
+	public class GamepadHandler : MonoBehaviour, IGamepadHandler
+	{
 		[Header("Gamepad variables")] [SerializeField]
 		private float rightAnalogDeadZone = 0.1f;
 
@@ -14,24 +16,29 @@ namespace Tank.Scripts {
 		public float AccelerateBack { get; private set; }
 		public bool IsBreaking { get; private set; }
 
-		private void Awake() {
+		private void Awake()
+		{
 			SetControls();
 		}
 
-		private void Update() {
+		private void Update()
+		{
 			if (MoveVector.magnitude < rightAnalogDeadZone) MoveVector = Vector2.zero;
 			if (AimVector.magnitude < leftAnalogDeadZone) AimVector = Vector2.zero;
 		}
 
-		private void OnEnable() {
+		private void OnEnable()
+		{
 			tankKeyMap.General.Enable();
 		}
 
-		private void OnDisable() {
+		private void OnDisable()
+		{
 			tankKeyMap.General.Disable();
 		}
 
-		private void SetControls() {
+		private void SetControls()
+		{
 			tankKeyMap = new TankKeyMap();
 
 			tankKeyMap.General.Move.performed += ctx => MoveVector = ctx.ReadValue<Vector2>();

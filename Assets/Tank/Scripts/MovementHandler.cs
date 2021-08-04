@@ -1,74 +1,81 @@
 using UnityEngine;
 
-namespace Tank.Scripts {
-    public class MovementHandler
-    {
-        private GamepadHandler gamepad;
-        private Rigidbody tankRigidBody;
-    
-        private float motorForce = 100f;
-        private float maxSpeed = 100;
+namespace Tank.Scripts
+{
+	public class MovementHandler
+	{
+		private readonly float breakingForce;
+		private readonly WheelCollider frontLeftWheel;
 
-        private float breakingForce = 100f;
-        private float steerAngle = 30f;
+		private readonly WheelCollider frontRightWheel;
+		private readonly GamepadHandler gamepad;
+		private readonly float maxSpeed;
 
-        private WheelCollider frontRightWheel;
-        private WheelCollider frontLeftWheel;
-        private WheelCollider rearRightWheel;
-        private WheelCollider rearLeftWheel;
-    
-        private bool isBreaking;
+		private readonly float motorForce;
+		private readonly WheelCollider rearLeftWheel;
+		private readonly WheelCollider rearRightWheel;
+		private readonly float steerAngle;
+		private readonly Rigidbody tankRigidBody;
 
-        public MovementHandler(TankController tankController) {
-            gamepad = tankController.Gamepad;
-            tankRigidBody = tankController.TankRigidBody;
+		private bool isBreaking;
 
-            motorForce = tankController.MotorForce;
-            maxSpeed = tankController.MaxSpeed;
+		public MovementHandler(TankController tankController)
+		{
+			gamepad = tankController.Gamepad;
+			tankRigidBody = tankController.TankRigidBody;
 
-            breakingForce = tankController.BreakingForce;
-            steerAngle = tankController.SteerAngle;
+			motorForce = tankController.MotorForce;
+			maxSpeed = tankController.MaxSpeed;
 
-            frontRightWheel = tankController.FrontRightWheel;
-            frontLeftWheel = tankController.FrontLeftWheel;
-            rearRightWheel = tankController.RearRightWheel;
-            rearLeftWheel = tankController.RearLeftWheel;
-        }
+			breakingForce = tankController.BreakingForce;
+			steerAngle = tankController.SteerAngle;
 
-        public void HandleMotor() {
-            if (gamepad.IsBreaking) return;
-            if (tankRigidBody.velocity.magnitude > maxSpeed) return;
+			frontRightWheel = tankController.FrontRightWheel;
+			frontLeftWheel = tankController.FrontLeftWheel;
+			rearRightWheel = tankController.RearRightWheel;
+			rearLeftWheel = tankController.RearLeftWheel;
+		}
 
-            var acceleration = gamepad.AccelerateFront - gamepad.AccelerateBack;
-            BrakeWhenAccelerateInAnotherDirection(acceleration);
-            if (isBreaking) return;
-            
-            frontRightWheel.motorTorque = motorForce * acceleration;
-            frontLeftWheel.motorTorque = motorForce * acceleration;
-        }
+		public void HandleMotor()
+		{
+			if (gamepad.IsBreaking) return;
+			if (tankRigidBody.velocity.magnitude > maxSpeed) return;
 
-        private void BrakeWhenAccelerateInAnotherDirection(float acceleration) {
-            var velocity = tankRigidBody.transform.InverseTransformDirection(tankRigidBody.velocity);
-            var isAccelerationInOppositeDirection = acceleration < 0 && velocity.z > 0.2f || acceleration > 0 && velocity.z < -0.2f;
+			var acceleration = gamepad.AccelerateFront - gamepad.AccelerateBack;
+			BrakeWhenAccelerateInAnotherDirection(acceleration);
+			if (isBreaking) return;
 
-            isBreaking = isAccelerationInOppositeDirection;
-        }
+			frontRightWheel.motorTorque = motorForce * acceleration;
+			frontLeftWheel.motorTorque = motorForce * acceleration;
+		}
 
-        public void HandleBreaking() {
-            ApplyBreaking(isBreaking || gamepad.IsBreaking ? breakingForce : 0f);
-        }
+		private void BrakeWhenAccelerateInAnotherDirection(float acceleration)
+		{
+			var velocity = tankRigidBody.transform.InverseTransformDirection(tankRigidBody.velocity);
+			var isAccelerationInOppositeDirection =
+				acceleration < 0 && velocity.z > 0.2f || acceleration > 0 && velocity.z < -0.2f;
 
-        private void ApplyBreaking(float force) {
-            frontRightWheel.brakeTorque = force;
-            frontLeftWheel.brakeTorque = force;
-            rearRightWheel.brakeTorque = force;
-            rearLeftWheel.brakeTorque = force;
-        }
+			isBreaking = isAccelerationInOppositeDirection;
+		}
 
-        public void HandleSteering() {
-            var actualSteerAngle = gamepad.MoveVector.x * steerAngle;
-            frontLeftWheel.steerAngle = actualSteerAngle;
-            frontRightWheel.steerAngle = actualSteerAngle;
-        }
-    }
+		public void HandleBreaking()
+		{
+			ApplyBreaking(isBreaking || gamepad.IsBreaking ? breakingForce : 0f);
+		}
+
+		private void ApplyBreaking(float force)
+		{
+			frontRightWheel.brakeTorque = force;
+			frontLeftWheel.brakeTorque = force;
+			rearRightWheel.brakeTorque = force;
+			rearLeftWheel.brakeTorque = force;
+		}
+
+		public void HandleSteering()
+		{
+			var actualSteerAngle = gamepad.MoveVector.x * steerAngle;
+			frontLeftWheel.steerAngle = actualSteerAngle;
+			frontRightWheel.steerAngle = actualSteerAngle;
+		}
+	}
 }
