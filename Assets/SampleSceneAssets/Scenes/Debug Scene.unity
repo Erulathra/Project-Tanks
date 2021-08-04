@@ -4304,7 +4304,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh36230
+  m_Name: pb_Mesh29976
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
@@ -20617,7 +20617,7 @@ ParticleSystem:
       serializedVersion: 2
       minMaxState: 0
       minColor: {r: 1, g: 1, b: 1, a: 1}
-      maxColor: {r: 1, g: 1, b: 1, a: 1}
+      maxColor: {r: 0.087417364, g: 1, b: 0, a: 1}
       maxGradient:
         serializedVersion: 2
         key0: {r: 1, g: 1, b: 1, a: 1}
@@ -29061,7 +29061,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 60
+  field of view: 90
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -29086,7 +29086,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530338902}
-  m_LocalRotation: {x: 0.47167203, y: -1.7263255e-22, z: 6.957955e-23, w: 0.88177407}
+  m_LocalRotation: {x: 0.47167203, y: -1e-45, z: 1e-45, w: 0.8817741}
   m_LocalPosition: {x: -12, y: 22.75, z: -36.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -31330,6 +31330,7 @@ MonoBehaviour:
   towerRotationSpeed: 5
   motorForce: 2500
   maxSpeed: 5
+  motorResistance: 10
   breakingForce: 5000
   steerAngle: 80
   frontRightWheel: {fileID: 703829671}
@@ -35412,7 +35413,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718857727}
-  m_LocalRotation: {x: 0.47167203, y: -1.7263255e-22, z: 6.957955e-23, w: 0.88177407}
+  m_LocalRotation: {x: 0.47167203, y: -1e-45, z: 1e-45, w: 0.8817741}
   m_LocalPosition: {x: -12, y: 22.75, z: -36.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:

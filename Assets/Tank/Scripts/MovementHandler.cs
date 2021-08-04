@@ -1,3 +1,4 @@
+using System.Runtime.InteropServices.WindowsRuntime;
 using UnityEngine;
 
 namespace Tank.Scripts
@@ -12,6 +13,7 @@ namespace Tank.Scripts
 		private readonly float maxSpeed;
 
 		private readonly float motorForce;
+		private readonly float motorResistance;
 		private readonly WheelCollider rearLeftWheel;
 		private readonly WheelCollider rearRightWheel;
 		private readonly float steerAngle;
@@ -34,14 +36,19 @@ namespace Tank.Scripts
 			frontLeftWheel = tankController.FrontLeftWheel;
 			rearRightWheel = tankController.RearRightWheel;
 			rearLeftWheel = tankController.RearLeftWheel;
+			motorResistance = tankController.MotorResistance;
 		}
 
 		public void HandleMotor()
 		{
 			if (IsBreaking()) return;
-			if (tankRigidBody.velocity.magnitude > maxSpeed) return;
-			
-			var actualMotorForce = motorForce * Acceleration();
+			var actualMotorTorque = motorForce * Acceleration();
+			if (tankRigidBody.velocity.magnitude > maxSpeed) actualMotorTorque = 0;
+			ApplyMotorTorqueToFrontWheels(actualMotorTorque);
+		}
+
+		private void ApplyMotorTorqueToFrontWheels(float actualMotorForce)
+		{
 			frontRightWheel.motorTorque = actualMotorForce;
 			frontLeftWheel.motorTorque = actualMotorForce;
 		}
@@ -81,6 +88,12 @@ namespace Tank.Scripts
 			var actualSteerAngle = gamepad.MoveVector.x * steerAngle;
 			frontLeftWheel.steerAngle = actualSteerAngle;
 			frontRightWheel.steerAngle = actualSteerAngle;
+		}
+
+		public void HandleIdleMotorResistance()
+		{
+			if (Acceleration() == 0 && tankRigidBody.velocity.magnitude != 0)
+				ApplyBreaking(motorResistance);
 		}
 	}
 }
