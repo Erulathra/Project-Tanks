@@ -6,14 +6,14 @@ namespace Tank.Scripts
 {
 	public class AimHandler
 	{
-		[NotNull] private readonly GamepadHandler gamepad;
+		[NotNull] private readonly IGamepadHandler gamepad;
 		private readonly Transform tankTransform;
 		private readonly float towerRotationSpeed;
 		private readonly Transform towerTransform;
 
 		public AimHandler(TankMovementController tankMovementController)
 		{
-			gamepad = tankMovementController.Gamepad;
+			gamepad = tankMovementController.GamepadHandler;
 			towerTransform = tankMovementController.TowerTransform;
 			tankTransform = tankMovementController.transform;
 			towerRotationSpeed = tankMovementController.TowerRotationSpeed;

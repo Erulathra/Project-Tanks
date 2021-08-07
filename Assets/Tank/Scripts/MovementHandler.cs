@@ -9,7 +9,7 @@ namespace Tank.Scripts
 		private readonly WheelCollider frontLeftWheel;
 
 		private readonly WheelCollider frontRightWheel;
-		private readonly GamepadHandler gamepad;
+		private readonly IGamepadHandler gamepad;
 		private readonly float maxSpeed;
 
 		private readonly float motorForce;
@@ -23,7 +23,7 @@ namespace Tank.Scripts
 
 		public MovementHandler(TankMovementController tankMovementController)
 		{
-			gamepad = tankMovementController.Gamepad;
+			gamepad = tankMovementController.GamepadHandler;
 			tankRigidBody = tankMovementController.TankRigidBody;
 
 			motorForce = tankMovementController.MotorForce;

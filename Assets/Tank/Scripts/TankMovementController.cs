@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 using UnityEngine.Serialization;
 
@@ -29,11 +30,13 @@ namespace Tank.Scripts
 
 		private MovementHandler movementHandler;
 		private AimHandler aimHandler;
+		public IGamepadHandler GamepadHandler { get; private set; }
 
 		private void Start()
 		{
 			TankRigidBody = GetComponent<Rigidbody>();
-			Gamepad = GetComponent<GamepadHandler>();
+			GamepadHandler = GetComponent<IGamepadHandler>();
+			if (GamepadHandler == null) throw new NullReferenceException("gamepadHandler");
 
 			movementHandler = new MovementHandler(this);
 			aimHandler = new AimHandler(this);
@@ -57,8 +60,6 @@ namespace Tank.Scripts
 		#region Properties
 
 		public float MotorResistance => motorResistance;
-
-		public GamepadHandler Gamepad { get; private set; }
 
 		public Transform TowerTransform => towerTransform;
 

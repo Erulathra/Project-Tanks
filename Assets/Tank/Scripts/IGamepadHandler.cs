@@ -9,5 +9,7 @@ namespace Tank.Scripts
 		float AccelerateFront { get; }
 		float AccelerateBack { get; }
 		bool IsBreaking { get; }
+		bool IsShooting { get;}
+
 	}
 }

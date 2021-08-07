@@ -1,18 +1,30 @@
-using System.Collections;
-using System.Collections.Generic;
 using UnityEngine;
 
-public class TankShootingController : MonoBehaviour
+namespace Tank.Scripts
 {
-    // Start is called before the first frame update
-    void Start()
-    {
-        
-    }
+	[RequireComponent(typeof(GamepadHandler))]
+	public class TankShootingController : MonoBehaviour
+	{
+		[SerializeField] private Transform muzzle;
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
+		private IGamepadHandler gamepadHandler;
+		private ITankShootParticleEffectHandler tankShootParticleEffectHandler;
+
+		private void Start()
+		{
+			gamepadHandler = GetComponent<IGamepadHandler>();
+			tankShootParticleEffectHandler = GetComponent<ITankShootParticleEffectHandler>();
+		}
+
+		private void Update()
+		{
+			HandleShooting();
+		}
+
+		private void HandleShooting()
+		{
+			if (!gamepadHandler.IsShooting) return;
+			tankShootParticleEffectHandler.Play();
+		}
+	}
 }

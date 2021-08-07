@@ -1,16 +1,15 @@
-// GENERATED AUTOMATICALLY FROM 'Assets/TankKeyMap.inputactions'
+// GENERATED AUTOMATICALLY FROM 'Assets/Tank/Scripts/Keymap/TankKeyMap.inputactions'
 
 using System;
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
-using Object = UnityEngine.Object;
 
-public class TankKeyMap : IInputActionCollection, IDisposable
+public class @TankKeyMap : IInputActionCollection, IDisposable
 {
     public InputActionAsset asset { get; }
-    public TankKeyMap()
+    public @TankKeyMap()
     {
         asset = InputActionAsset.FromJson(@"{
     ""name"": ""TankKeyMap"",
@@ -152,7 +151,7 @@ public class TankKeyMap : IInputActionCollection, IDisposable
 
     public void Dispose()
     {
-        Object.Destroy(asset);
+        UnityEngine.Object.Destroy(asset);
     }
 
     public InputBinding? bindingMask
@@ -205,14 +204,14 @@ public class TankKeyMap : IInputActionCollection, IDisposable
     private readonly InputAction m_General_HandBrake;
     public struct GeneralActions
     {
-        private TankKeyMap m_Wrapper;
-        public GeneralActions(TankKeyMap wrapper) { m_Wrapper = wrapper; }
-        public InputAction Move => m_Wrapper.m_General_Move;
-        public InputAction Aim => m_Wrapper.m_General_Aim;
-        public InputAction Shoot => m_Wrapper.m_General_Shoot;
-        public InputAction AccelerateFront => m_Wrapper.m_General_AccelerateFront;
-        public InputAction AccelerateBack => m_Wrapper.m_General_AccelerateBack;
-        public InputAction HandBrake => m_Wrapper.m_General_HandBrake;
+        private @TankKeyMap m_Wrapper;
+        public GeneralActions(@TankKeyMap wrapper) { m_Wrapper = wrapper; }
+        public InputAction @Move => m_Wrapper.m_General_Move;
+        public InputAction @Aim => m_Wrapper.m_General_Aim;
+        public InputAction @Shoot => m_Wrapper.m_General_Shoot;
+        public InputAction @AccelerateFront => m_Wrapper.m_General_AccelerateFront;
+        public InputAction @AccelerateBack => m_Wrapper.m_General_AccelerateBack;
+        public InputAction @HandBrake => m_Wrapper.m_General_HandBrake;
         public InputActionMap Get() { return m_Wrapper.m_General; }
         public void Enable() { Get().Enable(); }
         public void Disable() { Get().Disable(); }
@@ -222,50 +221,50 @@ public class TankKeyMap : IInputActionCollection, IDisposable
         {
             if (m_Wrapper.m_GeneralActionsCallbackInterface != null)
             {
-                Move.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnMove;
-                Move.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnMove;
-                Move.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnMove;
-                Aim.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAim;
-                Aim.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAim;
-                Aim.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAim;
-                Shoot.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnShoot;
-                Shoot.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnShoot;
-                Shoot.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnShoot;
-                AccelerateFront.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateFront;
-                AccelerateFront.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateFront;
-                AccelerateFront.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateFront;
-                AccelerateBack.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateBack;
-                AccelerateBack.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateBack;
-                AccelerateBack.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateBack;
-                HandBrake.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnHandBrake;
-                HandBrake.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnHandBrake;
-                HandBrake.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnHandBrake;
+                @Move.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnMove;
+                @Move.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnMove;
+                @Move.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnMove;
+                @Aim.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAim;
+                @Aim.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAim;
+                @Aim.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAim;
+                @Shoot.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnShoot;
+                @Shoot.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnShoot;
+                @Shoot.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnShoot;
+                @AccelerateFront.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateFront;
+                @AccelerateFront.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateFront;
+                @AccelerateFront.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateFront;
+                @AccelerateBack.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateBack;
+                @AccelerateBack.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateBack;
+                @AccelerateBack.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnAccelerateBack;
+                @HandBrake.started -= m_Wrapper.m_GeneralActionsCallbackInterface.OnHandBrake;
+                @HandBrake.performed -= m_Wrapper.m_GeneralActionsCallbackInterface.OnHandBrake;
+                @HandBrake.canceled -= m_Wrapper.m_GeneralActionsCallbackInterface.OnHandBrake;
             }
             m_Wrapper.m_GeneralActionsCallbackInterface = instance;
             if (instance != null)
             {
-                Move.started += instance.OnMove;
-                Move.performed += instance.OnMove;
-                Move.canceled += instance.OnMove;
-                Aim.started += instance.OnAim;
-                Aim.performed += instance.OnAim;
-                Aim.canceled += instance.OnAim;
-                Shoot.started += instance.OnShoot;
-                Shoot.performed += instance.OnShoot;
-                Shoot.canceled += instance.OnShoot;
-                AccelerateFront.started += instance.OnAccelerateFront;
-                AccelerateFront.performed += instance.OnAccelerateFront;
-                AccelerateFront.canceled += instance.OnAccelerateFront;
-                AccelerateBack.started += instance.OnAccelerateBack;
-                AccelerateBack.performed += instance.OnAccelerateBack;
-                AccelerateBack.canceled += instance.OnAccelerateBack;
-                HandBrake.started += instance.OnHandBrake;
-                HandBrake.performed += instance.OnHandBrake;
-                HandBrake.canceled += instance.OnHandBrake;
+                @Move.started += instance.OnMove;
+                @Move.performed += instance.OnMove;
+                @Move.canceled += instance.OnMove;
+                @Aim.started += instance.OnAim;
+                @Aim.performed += instance.OnAim;
+                @Aim.canceled += instance.OnAim;
+                @Shoot.started += instance.OnShoot;
+                @Shoot.performed += instance.OnShoot;
+                @Shoot.canceled += instance.OnShoot;
+                @AccelerateFront.started += instance.OnAccelerateFront;
+                @AccelerateFront.performed += instance.OnAccelerateFront;
+                @AccelerateFront.canceled += instance.OnAccelerateFront;
+                @AccelerateBack.started += instance.OnAccelerateBack;
+                @AccelerateBack.performed += instance.OnAccelerateBack;
+                @AccelerateBack.canceled += instance.OnAccelerateBack;
+                @HandBrake.started += instance.OnHandBrake;
+                @HandBrake.performed += instance.OnHandBrake;
+                @HandBrake.canceled += instance.OnHandBrake;
             }
         }
     }
-    public GeneralActions General => new GeneralActions(this);
+    public GeneralActions @General => new GeneralActions(this);
     public interface IGeneralActions
     {
         void OnMove(InputAction.CallbackContext context);

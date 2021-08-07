@@ -1,4 +1,5 @@
 using UnityEngine;
+using UnityEngine.InputSystem;
 
 namespace Tank.Scripts
 {
@@ -15,6 +16,7 @@ namespace Tank.Scripts
 		public float AccelerateFront { get; private set; }
 		public float AccelerateBack { get; private set; }
 		public bool IsBreaking { get; private set; }
+		public bool IsShooting { get; private set; }
 
 		private void Awake()
 		{
@@ -30,32 +32,38 @@ namespace Tank.Scripts
 		{
 			tankKeyMap.General.Disable();
 		}
-
+		
 		private void SetControls()
 		{
 			tankKeyMap = new TankKeyMap();
 
-			tankKeyMap.General.Move.performed += ctx =>
-			{
-				MoveVector = ctx.ReadValue<Vector2>();
-				if (MoveVector.magnitude < rightAnalogDeadZone) MoveVector = Vector2.zero;
-			};
-			
-			tankKeyMap.General.Aim.performed += ctx =>
-			{
-				AimVector = ctx.ReadValue<Vector2>();
-				if (AimVector.magnitude < leftAnalogDeadZone) AimVector = Vector2.zero;
-			};
-			
+			tankKeyMap.General.Move.performed += MoveInputAction;
+			tankKeyMap.General.Aim.performed += AimInputAction;
+
 			tankKeyMap.General.AccelerateFront.performed += ctx => AccelerateFront = ctx.ReadValue<float>();
 			tankKeyMap.General.AccelerateBack.performed += ctx => AccelerateBack = ctx.ReadValue<float>();
 			tankKeyMap.General.HandBrake.performed += _ => IsBreaking = true;
+			tankKeyMap.General.Shoot.performed += _ => IsShooting = true;
 
 			tankKeyMap.General.Move.canceled += _ => MoveVector = Vector2.zero;
 			tankKeyMap.General.Aim.canceled += _ => AimVector = Vector2.zero;
 			tankKeyMap.General.AccelerateFront.canceled += _ => AccelerateFront = 0f;
 			tankKeyMap.General.AccelerateBack.canceled += _ => AccelerateBack = 0f;
 			tankKeyMap.General.HandBrake.canceled += _ => IsBreaking = false;
+			tankKeyMap.General.Shoot.canceled += _ => IsShooting = false;
+
+		}
+
+		private void MoveInputAction(InputAction.CallbackContext ctx)
+		{
+			MoveVector = ctx.ReadValue<Vector2>();
+			if (MoveVector.magnitude < rightAnalogDeadZone) MoveVector = Vector2.zero;
+		}
+
+		private void AimInputAction(InputAction.CallbackContext ctx)
+		{
+			AimVector = ctx.ReadValue<Vector2>();
+			if (AimVector.magnitude < leftAnalogDeadZone) AimVector = Vector2.zero;
 		}
 	}
 }
