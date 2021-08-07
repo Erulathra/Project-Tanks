@@ -11,12 +11,12 @@ namespace Tank.Scripts
 		private readonly float towerRotationSpeed;
 		private readonly Transform towerTransform;
 
-		public AimHandler(TankController tankController)
+		public AimHandler(TankMovementController tankMovementController)
 		{
-			gamepad = tankController.Gamepad;
-			towerTransform = tankController.TowerTransform;
-			tankTransform = tankController.transform;
-			towerRotationSpeed = tankController.TowerRotationSpeed;
+			gamepad = tankMovementController.Gamepad;
+			towerTransform = tankMovementController.TowerTransform;
+			tankTransform = tankMovementController.transform;
+			towerRotationSpeed = tankMovementController.TowerRotationSpeed;
 		}
 
 		public void HandleAim()

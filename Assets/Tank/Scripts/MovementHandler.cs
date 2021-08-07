@@ -21,22 +21,22 @@ namespace Tank.Scripts
 
 		private bool isBreaking;
 
-		public MovementHandler(TankController tankController)
+		public MovementHandler(TankMovementController tankMovementController)
 		{
-			gamepad = tankController.Gamepad;
-			tankRigidBody = tankController.TankRigidBody;
+			gamepad = tankMovementController.Gamepad;
+			tankRigidBody = tankMovementController.TankRigidBody;
 
-			motorForce = tankController.MotorForce;
-			maxSpeed = tankController.MaxSpeed;
+			motorForce = tankMovementController.MotorForce;
+			maxSpeed = tankMovementController.MaxSpeed;
 
-			breakingForce = tankController.BreakingForce;
-			steerAngle = tankController.SteerAngle;
+			breakingForce = tankMovementController.BreakingForce;
+			steerAngle = tankMovementController.SteerAngle;
 
-			frontRightWheel = tankController.FrontRightWheel;
-			frontLeftWheel = tankController.FrontLeftWheel;
-			rearRightWheel = tankController.RearRightWheel;
-			rearLeftWheel = tankController.RearLeftWheel;
-			motorResistance = tankController.MotorResistance;
+			frontRightWheel = tankMovementController.FrontRightWheel;
+			frontLeftWheel = tankMovementController.FrontLeftWheel;
+			rearRightWheel = tankMovementController.RearRightWheel;
+			rearLeftWheel = tankMovementController.RearLeftWheel;
+			motorResistance = tankMovementController.MotorResistance;
 		}
 
 		public void HandleMotor()
