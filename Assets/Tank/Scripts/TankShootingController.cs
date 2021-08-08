@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Tank.Scripts
@@ -8,12 +9,14 @@ namespace Tank.Scripts
 		[SerializeField] private Transform muzzle;
 
 		private IGamepadHandler gamepadHandler;
-		private ITankShootParticleEffectHandler tankShootParticleEffectHandler;
+		private TankShootParticleEffectHandler tankShootParticleEffectHandler;
+		
+		public event Action OnShoot;
 
 		private void Start()
 		{
 			gamepadHandler = GetComponent<IGamepadHandler>();
-			tankShootParticleEffectHandler = GetComponent<ITankShootParticleEffectHandler>();
+			tankShootParticleEffectHandler = GetComponent<TankShootParticleEffectHandler>();
 		}
 
 		private void Update()
@@ -24,7 +27,7 @@ namespace Tank.Scripts
 		private void HandleShooting()
 		{
 			if (!gamepadHandler.IsShooting) return;
-			tankShootParticleEffectHandler.Play();
+			OnShoot?.Invoke();
 		}
 	}
 }
