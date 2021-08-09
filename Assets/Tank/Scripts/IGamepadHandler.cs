@@ -1,3 +1,4 @@
+using System;
 using UnityEngine;
 
 namespace Tank.Scripts
@@ -9,7 +10,7 @@ namespace Tank.Scripts
 		float AccelerateFront { get; }
 		float AccelerateBack { get; }
 		bool IsBreaking { get; }
-		bool IsShooting { get;}
-
+		bool IsShooting { get; }
+		public event Action OnShoot;
 	}
 }

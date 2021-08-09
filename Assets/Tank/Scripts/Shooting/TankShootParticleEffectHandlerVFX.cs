@@ -7,7 +7,7 @@ namespace Tank.Scripts
 	{
 		[SerializeField] private VisualEffect muzzleFlash;
 
-		protected override void Play()
+		public override void Play()
 		{
 			muzzleFlash.Play();
 		}

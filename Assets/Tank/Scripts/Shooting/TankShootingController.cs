@@ -6,28 +6,27 @@ namespace Tank.Scripts
 	[RequireComponent(typeof(GamepadHandler))]
 	public class TankShootingController : MonoBehaviour
 	{
-		[SerializeField] private Transform muzzle;
-
 		private IGamepadHandler gamepadHandler;
 		private TankShootParticleEffectHandler tankShootParticleEffectHandler;
+		private IShootingHandler shootingHandler;
 		
-		public event Action OnShoot;
-
 		private void Start()
 		{
 			gamepadHandler = GetComponent<IGamepadHandler>();
+			shootingHandler = GetComponent<IShootingHandler>();
+			gamepadHandler.OnShoot += HandleShooting;
 			tankShootParticleEffectHandler = GetComponent<TankShootParticleEffectHandler>();
 		}
 
-		private void Update()
+		private void OnDestroy()
 		{
-			HandleShooting();
+			gamepadHandler.OnShoot -= HandleShooting;
 		}
-
+		
 		private void HandleShooting()
 		{
-			if (!gamepadHandler.IsShooting) return;
-			OnShoot?.Invoke();
+			tankShootParticleEffectHandler.Play();
+			shootingHandler.Shoot();
 		}
 	}
 }

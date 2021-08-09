@@ -35,7 +35,6 @@ namespace Tank.Scripts
         public GameObject GetShell()
         {
             var tempGameObject = availableShells.Pop();
-            tempGameObject.SetActive(true);
             return tempGameObject;
         }
 
