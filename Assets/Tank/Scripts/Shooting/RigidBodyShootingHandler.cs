@@ -12,14 +12,13 @@ namespace Tank.Scripts
 		[Header("Bullet Info")] [Tooltip("In seconds")] [SerializeField]
 		private float reloadTime = 1f;
 
-		[SerializeField] private float shellShootForce = 100f;
+		[SerializeField] private float shellStartVelocity = 100f;
 
-
-		private ShellContainer shellContainer;
-
+		private new Rigidbody rigidbody;
+		
 		private void Awake()
 		{
-			shellContainer = ShellContainer.Instance;
+			rigidbody = this.GetComponent<Rigidbody>();
 		}
 
 		public void Shoot()
@@ -32,7 +31,7 @@ namespace Tank.Scripts
 		private void FireShell(GameObject shell)
 		{
 			var shellRigidbody = shell.GetComponent<Rigidbody>();
-			shellRigidbody.AddForce(shell.transform.forward * shellShootForce);
+			shellRigidbody.AddForce(shell.transform.forward * shellStartVelocity + rigidbody.velocity);
 		}
 
 		private static GameObject CreateShell()

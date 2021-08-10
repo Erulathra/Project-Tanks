@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Tank.Scripts.Shooting.Shell;
 using UnityEngine;
 
 namespace Tank.Scripts
@@ -40,7 +41,8 @@ namespace Tank.Scripts
 
         public void ReturnShell(GameObject shell)
         {
-            if (shell.GetComponent<ShellScript>() != null) throw new ArgumentException("This Game Object doesn't contain ShellScript");
+            if (shell.GetComponent<ShellScript>() == null) throw new ArgumentException("This Game Object doesn't contain ShellScript");
+            shell.GetComponent<Rigidbody>().velocity = Vector3.zero;
             shell.SetActive(false);
             availableShells.Push(shell);
         }
