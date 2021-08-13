@@ -1,3 +1,5 @@
+using System;
+using Pool;
 using Scripts;
 using UnityEngine;
 
@@ -8,12 +10,12 @@ namespace Tank.Scripts.Shooting.Shell
 		[SerializeField] private float shellLife = 10f;
 
 		private Timer explodeTimer;
-		private IShellCollisionsHandler ShellCollisionsHandler;
+		private IShellCollisionsHandler shellCollisionsHandler;
 
 		private void Awake()
 		{
-			ShellCollisionsHandler = GetComponent<IShellCollisionsHandler>();
-			ShellCollisionsHandler.OnCollisionEnter += Explode;
+			shellCollisionsHandler = GetComponent<IShellCollisionsHandler>();
+			shellCollisionsHandler.OnCollisionEnter += Explode;
 		}
 
 		private void OnEnable()
@@ -34,8 +36,13 @@ namespace Tank.Scripts.Shooting.Shell
 
 		private void Explode()
 		{
-			Debug.Log("Boom!!!");
-			ShellContainer.Instance.ReturnShell(this.gameObject);
+			ResetParameters();
+			GetComponent<PoolMember>().ReturnToPool();
+		}
+
+		private void ResetParameters()
+		{
+			this.GetComponent<Rigidbody>().velocity = Vector3.zero;
 		}
 	}
 }

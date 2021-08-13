@@ -1,13 +1,12 @@
-using System;
 using UnityEngine;
 
-namespace Tank.Scripts
+namespace Tank.Scripts.Shooting
 {
 	[RequireComponent(typeof(GamepadHandler))]
 	public class TankShootingController : MonoBehaviour
 	{
 		private IGamepadHandler gamepadHandler;
-		private TankShootParticleEffectHandler tankShootParticleEffectHandler;
+		private ParticleEffectHandler particleEffectHandler;
 		private IShootingHandler shootingHandler;
 		
 		private void Start()
@@ -15,7 +14,7 @@ namespace Tank.Scripts
 			gamepadHandler = GetComponent<IGamepadHandler>();
 			shootingHandler = GetComponent<IShootingHandler>();
 			gamepadHandler.OnShoot += HandleShooting;
-			tankShootParticleEffectHandler = GetComponent<TankShootParticleEffectHandler>();
+			particleEffectHandler = GetComponent<ParticleEffectHandler>();
 		}
 
 		private void OnDestroy()
@@ -25,7 +24,7 @@ namespace Tank.Scripts
 		
 		private void HandleShooting()
 		{
-			tankShootParticleEffectHandler.Play();
+			particleEffectHandler.Play();
 			shootingHandler.Shoot();
 		}
 	}

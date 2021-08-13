@@ -1,4 +1,5 @@
 using System;
+using Pool;
 using UnityEngine;
 
 namespace Tank.Scripts
@@ -8,6 +9,7 @@ namespace Tank.Scripts
 		[SerializeField] private Transform muzzle;
 		[SerializeField] private Transform tower;
 
+		[SerializeField] private ObjectPoolManager shellPool;
 
 		[Header("Bullet Info")] [Tooltip("In seconds")] [SerializeField]
 		private float reloadTime = 1f;
@@ -34,9 +36,9 @@ namespace Tank.Scripts
 			shellRigidbody.AddForce(shell.transform.forward * shellStartVelocity + rigidbody.velocity);
 		}
 
-		private static GameObject CreateShell()
+		private GameObject CreateShell()
 		{
-			var shell = ShellContainer.Instance.GetShell();
+			var shell = shellPool.GetObject();
 			return shell;
 		}
 
