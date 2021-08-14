@@ -1,4 +1,3 @@
-using System;
 using Pool;
 using Scripts;
 using UnityEngine;
@@ -42,7 +41,10 @@ namespace Tank.Scripts.Shooting.Shell
 
 		private void ResetParameters()
 		{
-			this.GetComponent<Rigidbody>().velocity = Vector3.zero;
+			GetComponent<Rigidbody>().velocity = Vector3.zero;
+			var objectTransform = transform;
+			objectTransform.position = Vector3.zero;
+			objectTransform.eulerAngles = Vector3.zero;
 		}
 	}
 }

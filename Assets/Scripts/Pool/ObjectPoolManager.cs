@@ -1,3 +1,4 @@
+using System;
 using System.Collections.Generic;
 using UnityEngine;
 
@@ -31,6 +32,7 @@ namespace Pool
 
         public GameObject GetObject()
         {
+            if (availableObjects.Count == 0) throw new ApplicationException("Pool \"" + this.gameObject.name + "\" is Empty");
             var tempGameObject = availableObjects.Pop();
             return tempGameObject;
         }

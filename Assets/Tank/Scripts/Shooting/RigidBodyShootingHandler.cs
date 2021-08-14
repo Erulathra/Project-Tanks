@@ -33,7 +33,7 @@ namespace Tank.Scripts
 		private void FireShell(GameObject shell)
 		{
 			var shellRigidbody = shell.GetComponent<Rigidbody>();
-			shellRigidbody.AddForce(shell.transform.forward * shellStartVelocity + rigidbody.velocity);
+			shellRigidbody.velocity = (shell.transform.forward * shellStartVelocity) + rigidbody.velocity;
 		}
 
 		private GameObject CreateShell()
