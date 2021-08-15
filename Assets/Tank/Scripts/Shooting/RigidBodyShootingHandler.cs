@@ -11,10 +11,9 @@ namespace Tank.Scripts
 
 		[SerializeField] private ObjectPoolManager shellPool;
 
-		// [Header("Bullet Info")] [Tooltip("In seconds")] [SerializeField]
-		// private float reloadTime = 1f;
-
-		[SerializeField] private float shellStartVelocity = 100f;
+		[SerializeField] private float shellStartVelocity = 10f;
+		[SerializeField] private float gunCounterForce = 50f;
+		
 
 		private new Rigidbody rigidbody;
 
@@ -28,8 +27,9 @@ namespace Tank.Scripts
 			var shell = GetShell();
 			PrepareShellToShot(shell);
 			FireShell(shell);
+			AddCounterForceToGun();
 		}
-
+		
 		private GameObject GetShell()
 		{
 			var shell = shellPool.GetObject();
@@ -50,9 +50,9 @@ namespace Tank.Scripts
 			shellRigidbody.transform.rotation = Quaternion.LookRotation(shellRigidbody.velocity);
 		}
 		
-		// private void Reload()
-		// {
-		// 	throw new NotImplementedException();
-		// }
+		private void AddCounterForceToGun()
+		{
+			GetComponent<Rigidbody>().AddForceAtPosition(-gunCounterForce * muzzle.forward, muzzle.position);
+		}
 	}
 }

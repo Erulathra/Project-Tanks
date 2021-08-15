@@ -1,3 +1,6 @@
+using System;
+using Tank.Scripts.Shooting.Gun;
+using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
 namespace Tank.Scripts.Shooting
@@ -5,16 +8,31 @@ namespace Tank.Scripts.Shooting
 	[RequireComponent(typeof(GamepadHandler))]
 	public class TankShootingController : MonoBehaviour
 	{
+		[SerializeField] public float reloadingTime = 1;
+		public ParticleEffectHandler ParticleEffectHandler { get; private set; }
+		public IShootingHandler ShootingHandler { get; private set; }
+		
 		private IGamepadHandler gamepadHandler;
-		private ParticleEffectHandler particleEffectHandler;
-		private IShootingHandler shootingHandler;
+		private IGunState gunState;
 		
 		private void Start()
 		{
+			PrepareThisComponent();
+		}
+
+		private void PrepareThisComponent()
+		{
 			gamepadHandler = GetComponent<IGamepadHandler>();
-			shootingHandler = GetComponent<IShootingHandler>();
+			ShootingHandler = GetComponent<IShootingHandler>();
+			ParticleEffectHandler = GetComponent<ParticleEffectHandler>();
+
 			gamepadHandler.OnShoot += HandleShooting;
-			particleEffectHandler = GetComponent<ParticleEffectHandler>();
+			gunState = new ReadyToShootGunState();
+		}
+
+		private void Update()
+		{
+			gunState.Update();
 		}
 
 		private void OnDestroy()
@@ -24,8 +42,7 @@ namespace Tank.Scripts.Shooting
 		
 		private void HandleShooting()
 		{
-			particleEffectHandler.Play();
-			shootingHandler.Shoot();
+			gunState = gunState.DoState(this);
 		}
 	}
 }
