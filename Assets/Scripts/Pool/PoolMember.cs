@@ -6,7 +6,7 @@ namespace Pool
 	{
 		private ObjectPoolManager parentObjectPoolManager;
 
-		public static PoolMember AddComponent(GameObject newOwner, ObjectPoolManager parentObjectPoolManager)
+		public static PoolMember AddPollMemberComponent(GameObject newOwner, ObjectPoolManager parentObjectPoolManager)
 		{
 			var newPoolMember = newOwner.AddComponent<PoolMember>();
 			newPoolMember.parentObjectPoolManager = parentObjectPoolManager;

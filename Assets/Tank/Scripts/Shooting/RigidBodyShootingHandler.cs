@@ -11,47 +11,48 @@ namespace Tank.Scripts
 
 		[SerializeField] private ObjectPoolManager shellPool;
 
-		[Header("Bullet Info")] [Tooltip("In seconds")] [SerializeField]
-		private float reloadTime = 1f;
+		// [Header("Bullet Info")] [Tooltip("In seconds")] [SerializeField]
+		// private float reloadTime = 1f;
 
 		[SerializeField] private float shellStartVelocity = 100f;
 
 		private new Rigidbody rigidbody;
-		
+
 		private void Awake()
 		{
-			rigidbody = this.GetComponent<Rigidbody>();
+			rigidbody = GetComponent<Rigidbody>();
 		}
 
 		public void Shoot()
 		{
-			var shell = CreateShell();
-			PrepareShell(shell);
+			var shell = GetShell();
+			PrepareShellToShot(shell);
 			FireShell(shell);
 		}
 
-		private void FireShell(GameObject shell)
-		{
-			var shellRigidbody = shell.GetComponent<Rigidbody>();
-			shellRigidbody.velocity = (shell.transform.forward * shellStartVelocity) + rigidbody.velocity;
-		}
-
-		private GameObject CreateShell()
+		private GameObject GetShell()
 		{
 			var shell = shellPool.GetObject();
 			return shell;
 		}
 
-		private void PrepareShell(GameObject shell)
+		private void PrepareShellToShot(GameObject shell)
 		{
-			shell.SetActive(true);
 			shell.transform.position = muzzle.position;
 			shell.transform.rotation = tower.rotation;
+			shell.SetActive(true);
 		}
 
-		private void Reload()
+		private void FireShell(GameObject shell)
 		{
-			throw new NotImplementedException();
+			var shellRigidbody = shell.GetComponent<Rigidbody>();
+			shellRigidbody.velocity = shell.transform.forward * shellStartVelocity + rigidbody.velocity;
+			shellRigidbody.transform.rotation = Quaternion.LookRotation(shellRigidbody.velocity);
 		}
+		
+		// private void Reload()
+		// {
+		// 	throw new NotImplementedException();
+		// }
 	}
 }

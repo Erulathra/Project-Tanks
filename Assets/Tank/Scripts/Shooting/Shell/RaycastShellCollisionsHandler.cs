@@ -11,23 +11,29 @@ namespace Tank.Scripts
 		private Vector3 actualPosition;
 
 		private RaycastHit hit;
+		private Vector3 hitPoint;
 		
 		public Vector3 GetHitPoint()
 		{
-			return hit.point;
+			return hitPoint;
 		}
 
-		private void Start()
+		private void OnEnable()
 		{
 			var position = transform.position;
 			previousPosition = position;
 			actualPosition = position;
+			hitPoint = Vector3.zero;
 		}
 
 		private void Update()
 		{
 			UpdatePositions();
-			if(CheckCollision()) OnCollisionEnter.Invoke();
+			if (CheckCollision())
+			{
+				hitPoint = hit.point;
+				OnCollisionEnter.Invoke();
+			}
 		}
 
 		private void UpdatePositions()

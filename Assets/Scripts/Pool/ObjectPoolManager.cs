@@ -7,11 +7,12 @@ namespace Pool
     public class ObjectPoolManager : MonoBehaviour
     {
         [SerializeField] private int objectCount = 100;
-        public int ObjectCount => this.objectCount;
-
         [SerializeField] private GameObject objectPrefab;
         
         private Stack<GameObject> availableObjects;
+
+        public delegate void OnCreateObjectEventDelegate(GameObject gameObject);
+        public event OnCreateObjectEventDelegate OnCreateObject;
 
         private void Awake()
         {
@@ -20,14 +21,29 @@ namespace Pool
 
         private void Start()
         {
+            FillAvailableObjectsWithGameObjects();
+        }
+
+        private void FillAvailableObjectsWithGameObjects()
+        {
             for (var i = 0; i < objectCount; i++)
             {
-                var tempGameObject = Instantiate(objectPrefab, this.transform);
-                    
-                tempGameObject.SetActive(false);
-                PoolMember.AddComponent(tempGameObject, this);
+                var tempGameObject = CreateObject();
+                PrepareObject(tempGameObject);
                 availableObjects.Push(tempGameObject);
             }
+        }
+
+        private GameObject CreateObject()
+        {
+            return Instantiate(objectPrefab, transform);
+        }
+
+        private void PrepareObject(GameObject createdGameObject)
+        {
+            createdGameObject.SetActive(false);
+            PoolMember.AddPollMemberComponent(createdGameObject, this);
+            OnCreateObject?.Invoke(createdGameObject);
         }
 
         public GameObject GetObject()
