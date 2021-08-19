@@ -7,6 +7,9 @@ public class Timer
 	private readonly float timeToEnd;
 	private float remainingSeconds;
 
+	private bool isTicking;
+	private bool wasInvoked;
+	
 	public Timer(float remainingSeconds)
 	{
 		timeToEnd = remainingSeconds;
@@ -15,13 +18,34 @@ public class Timer
 		
 	public void Update()
 	{
+		if (isTicking == false) return; 
 		remainingSeconds -= Time.deltaTime;
-		if(remainingSeconds <= 0) OnTimerEnd?.Invoke();
+		InvokeEventWhenTimesUp();
+	}
+
+	private void InvokeEventWhenTimesUp()
+	{
+		if (remainingSeconds > 0) return;
+		if (wasInvoked) return;
+		OnTimerEnd?.Invoke();
+		wasInvoked = true;
 	}
 
 	public void ResetTimer()
 	{
+		isTicking = false;
+		wasInvoked = false;
 		remainingSeconds = timeToEnd;
+	}
+
+	public void Start()
+	{
+		isTicking = true;
+	}
+	
+	public void Pause()
+	{
+		isTicking = false;
 	}
 		
 }

@@ -1,20 +1,24 @@
 using Pool;
+using Tank.Scripts.Shooting.ExplosionScripts;
 using UnityEngine;
+
 
 namespace Tank.Scripts.Shooting.Shell
 {
 	public class RigidbodyShellScript : MonoBehaviour
 	{
-		[SerializeField] private float shellLife = 10f;
-
+		[SerializeField] private float shellLifeTime = 10f;
+		[SerializeField] private float explosionLifeTime = 2f;
+		
+		
 		private Timer explodeTimer;
 		public ObjectPoolManager ExplosionPool { get; set; }
 		private IShellCollisionsHandler shellCollisionsHandler;
 
-
+		
 		private void Awake()
 		{
-			ExplosionPool = GameObject.FindWithTag("ExplosionPool").GetComponent<ObjectPoolManager>();
+			//ExplosionPool = GameObject.FindWithTag("ExplosionPool").GetComponent<ObjectPoolManager>();
 
 			shellCollisionsHandler = GetComponent<IShellCollisionsHandler>();
 			shellCollisionsHandler.OnCollisionEnter += Explode;
@@ -28,9 +32,10 @@ namespace Tank.Scripts.Shooting.Shell
 
 		private void OnEnable()
 		{
-			explodeTimer = new Timer(shellLife);
+			explodeTimer = new Timer(shellLifeTime);
 			explodeTimer.OnTimerEnd += Explode;
 			explodeTimer.OnTimerEnd += ReturnToPool;
+			explodeTimer.Start();
 		}
 
 		private void OnDisable()
@@ -46,16 +51,29 @@ namespace Tank.Scripts.Shooting.Shell
 		}
 		private void Explode()
 		{
-			AnimateExplosion();
+			var explosion = GetExplosionObject();
+			var explosionScript = explosion.GetComponent<Explosion>();
+			AddPoolTimerComponentToExplosionObject(explosionScript);
+
+			explosionScript.Explode();
 		}
-		
-		private void AnimateExplosion()
+
+		private void AddPoolTimerComponentToExplosionObject(Explosion explosionScript)
+		{
+			var returnToPoolTimer = explosionScript.gameObject.AddComponent<UnityEventTimer>();
+			returnToPoolTimer.timeToEnd = explosionLifeTime;
+			returnToPoolTimer.onTimerEnd.AddListener(explosionScript.Explode);
+			returnToPoolTimer.Start();
+		}
+
+		private GameObject GetExplosionObject()
 		{
 			var explosion = ExplosionPool.GetObject();
 			explosion.transform.position = GetHitPoint();
 			explosion.SetActive(true);
+			return explosion;
 		}
-		
+
 		private Vector3 GetHitPoint()
 		{
 			var raycastShellCollisionsHandler = GetComponent<RaycastShellCollisionsHandler>();

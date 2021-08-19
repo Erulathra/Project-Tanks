@@ -2,53 +2,23 @@ using Entities_Scripts;
 using Pool;
 using UnityEngine;
 
-namespace Tank.Scripts.Shooting.Explosion
+namespace Tank.Scripts.Shooting.ExplosionScripts
 {
 	public class Explosion : MonoBehaviour
 	{
-		[SerializeField] private float timeToAnimationOver = 2f;
 		[SerializeField] private float radius = 3f;
 		[SerializeField] private float force = 100f;
 		[SerializeField] private int damage = 100;
 
 
-		private Timer destroyTimer;
 		private ParticleEffectHandler particleEffectHandler;
 
 		private void Awake()
 		{
 			particleEffectHandler = GetComponent<ParticleEffectHandler>();
 		}
-
-		private void Update()
-		{
-			destroyTimer.Update();
-		}
-
-		private void OnEnable()
-		{
-			PrepareTimer();
-			Explode();
-			destroyTimer.OnTimerEnd += ReturnToPool;
-		}
-
-		private void OnDisable()
-		{
-			destroyTimer.OnTimerEnd -= ReturnToPool;
-		}
-
-		private void PrepareTimer()
-		{
-			destroyTimer = new Timer(timeToAnimationOver);
-			destroyTimer.ResetTimer();
-		}
-
-		private void ReturnToPool()
-		{
-			GetComponent<PoolMember>().ReturnToPool();
-		}
-
-		private void Explode()
+		
+		public void Explode()
 		{
 			var hitColliders = GetNearbyColliders();
 			ApplyPhysics(hitColliders);
@@ -88,6 +58,12 @@ namespace Tank.Scripts.Shooting.Explosion
 			//TODO Distance to damage
 			
 			hitDamageHandler.TakeDamage(damage);
+		}
+
+		public void ReturnToPool()
+		{
+			var poolMember = GetComponent<PoolMember>();
+			poolMember.ReturnToPool();
 		}
 	}
 }

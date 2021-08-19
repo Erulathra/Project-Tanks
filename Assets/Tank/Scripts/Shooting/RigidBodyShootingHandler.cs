@@ -1,5 +1,6 @@
 using System;
 using Pool;
+using Tank.Scripts.Shooting.Shell;
 using UnityEngine;
 
 namespace Tank.Scripts
@@ -10,7 +11,9 @@ namespace Tank.Scripts
 		[SerializeField] private Transform tower;
 
 		[SerializeField] private ObjectPoolManager shellPool;
+		[SerializeField] private ObjectPoolManager explosionPool;
 
+		
 		[SerializeField] private float shellStartVelocity = 10f;
 		[SerializeField] private float gunCounterForce = 50f;
 		
@@ -26,6 +29,7 @@ namespace Tank.Scripts
 		{
 			var shell = GetShell();
 			PrepareShellToShot(shell);
+			AddExplosionPoolReferenceToShell(shell);
 			FireShell(shell);
 			AddCounterForceToGun();
 		}
@@ -41,6 +45,12 @@ namespace Tank.Scripts
 			shell.transform.position = muzzle.position;
 			shell.transform.rotation = tower.rotation;
 			shell.SetActive(true);
+		}
+
+		private void AddExplosionPoolReferenceToShell(GameObject shell)
+		{
+			var rigidbodyShellScript = shell.GetComponent<RigidbodyShellScript>();
+			rigidbodyShellScript.ExplosionPool = explosionPool;
 		}
 
 		private void FireShell(GameObject shell)

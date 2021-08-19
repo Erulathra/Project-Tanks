@@ -129,6 +129,7 @@ MonoBehaviour:
   timeToAnimationOver: 2
   radius: 4
   force: 5000
+  damage: 100
 --- !u!114 &6708089679428826755
 MonoBehaviour:
   m_ObjectHideFlags: 0
