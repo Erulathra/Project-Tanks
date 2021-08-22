@@ -6,13 +6,14 @@ namespace Tank.Scripts.Shooting.ExplosionScripts
 {
 	public class Explosion : MonoBehaviour
 	{
-		[SerializeField] private float radius = 3f;
-		[SerializeField] private float force = 100f;
-		[SerializeField] private int damage = 100;
-
-
+		private ExplosionData explosionData;
 		private ParticleEffectHandler particleEffectHandler;
 
+		public void SetProperties(ExplosionData explosionData)
+		{
+			this.explosionData = explosionData;
+		}
+		
 		private void Awake()
 		{
 			particleEffectHandler = GetComponent<ParticleEffectHandler>();
@@ -25,24 +26,29 @@ namespace Tank.Scripts.Shooting.ExplosionScripts
 			ApplyDamage(hitColliders);
 			particleEffectHandler.Play();
 		}
-
-		private void ApplyPhysics(Collider[] nearbyColliders)
-		{
-			foreach (var hitCollider in nearbyColliders) ApplyExplosionForceToHitRigidbody(hitCollider);
-		}
-
+		
 		private Collider[] GetNearbyColliders()
 		{
-			var hitColliders = Physics.OverlapSphere(transform.position, radius);
+			var hitColliders = Physics.OverlapSphere(transform.position, explosionData.radius);
 			return hitColliders;
+		}
+		
+		private void ApplyPhysics(Collider[] nearbyColliders)
+		{
+			foreach (var hitCollider in nearbyColliders)
+			{
+				if (hitCollider.CompareTag("Explosion")) continue;
+				ApplyExplosionForceToHitRigidbody(hitCollider);
+			}
 		}
 
 		private void ApplyExplosionForceToHitRigidbody(Collider hitCollider)
 		{
+			
 			var hitRigidbody = hitCollider.GetComponent<Rigidbody>();
 			if (hitRigidbody == null) return;
 			
-			hitRigidbody.AddExplosionForce(force, transform.position, radius);
+			hitRigidbody.AddExplosionForce(explosionData.force, transform.position, explosionData.radius);
 		}
 		
 		private void ApplyDamage(Collider[] nearbyColliders)
@@ -52,14 +58,15 @@ namespace Tank.Scripts.Shooting.ExplosionScripts
 
 		private void ApplyExplosionDamageToHitRigidbody(Collider hitCollider)
 		{
+			if (hitCollider.CompareTag("Explosion")) return;
 			var hitDamageHandler = hitCollider.GetComponent<DamageHandler>();
 			if (hitDamageHandler == null) return;
 			
 			//TODO Distance to damage
 			
-			hitDamageHandler.TakeDamage(damage);
+			hitDamageHandler.TakeDamage(explosionData.damage);
 		}
-
+		
 		public void ReturnToPool()
 		{
 			var poolMember = GetComponent<PoolMember>();

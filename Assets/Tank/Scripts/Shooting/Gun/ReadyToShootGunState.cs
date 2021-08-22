@@ -6,6 +6,7 @@ namespace Tank.Scripts.Shooting.Gun
 		{
 			gun.ParticleEffectHandler.Play();
 			gun.ShootingHandler.Shoot();
+			gun.ShootingHandler.ExplosionData(gun.explosionData);
 			return new ReloadingGunState();
 		}
 

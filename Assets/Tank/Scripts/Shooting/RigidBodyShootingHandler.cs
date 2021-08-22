@@ -1,5 +1,7 @@
 using System;
 using Pool;
+using Tank.Scripts.Shooting;
+using Tank.Scripts.Shooting.ExplosionScripts;
 using Tank.Scripts.Shooting.Shell;
 using UnityEngine;
 
@@ -13,12 +15,17 @@ namespace Tank.Scripts
 		[SerializeField] private ObjectPoolManager shellPool;
 		[SerializeField] private ObjectPoolManager explosionPool;
 
-		
 		[SerializeField] private float shellStartVelocity = 10f;
 		[SerializeField] private float gunCounterForce = 50f;
 		
-
 		private new Rigidbody rigidbody;
+
+		private ExplosionData explosionData;
+
+		public void ExplosionData(ExplosionData explosionData)
+		{
+			this.explosionData = explosionData;
+		}
 
 		private void Awake()
 		{
@@ -30,6 +37,7 @@ namespace Tank.Scripts
 			var shell = GetShell();
 			PrepareShellToShot(shell);
 			AddExplosionPoolReferenceToShell(shell);
+			SetShellParameters(shell);
 			FireShell(shell);
 			AddCounterForceToGun();
 		}
@@ -51,6 +59,12 @@ namespace Tank.Scripts
 		{
 			var rigidbodyShellScript = shell.GetComponent<RigidbodyShellScript>();
 			rigidbodyShellScript.ExplosionPool = explosionPool;
+		}
+		
+		private void SetShellParameters(GameObject shell)
+		{
+			var rigidbodyShellScript = shell.GetComponent<RigidbodyShellScript>();
+			rigidbodyShellScript.ExplosionData = explosionData;
 		}
 
 		private void FireShell(GameObject shell)

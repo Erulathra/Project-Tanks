@@ -14,6 +14,8 @@ public class Timer
 	{
 		timeToEnd = remainingSeconds;
 		ResetTimer();
+		isTicking = false;
+		wasInvoked = false;
 	}
 		
 	public void Update()

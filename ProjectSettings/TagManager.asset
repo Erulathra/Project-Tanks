@@ -5,6 +5,7 @@ TagManager:
   serializedVersion: 2
   tags:
   - ExplosionPool
+  - Explosion
   layers:
   - Default
   - TransparentFX

@@ -3,19 +3,32 @@ using UnityEngine.Events;
 
 public class UnityEventTimer : MonoBehaviour
 {
+	[SerializeField] private bool isStartingOnEnable = false;
+
 	public float timeToEnd;
 	public UnityEvent onTimerEnd;
 
 	private Timer timer;
- //todo tu się pomyśli
-	private void OnEnable()
+
+	public void Start()
 	{
 		timer = new Timer(timeToEnd);
-		if(onTimerEnd != null) Start();
 		
-		onTimerEnd ??= new UnityEvent();
-		
+		timer.Start();
 		timer.OnTimerEnd += InvokeEvent;
+	}
+
+	private void Update()
+	{
+		timer.Update();
+	}
+
+	//todo tu się pomyśli
+	private void OnEnable()
+	{
+		onTimerEnd = new UnityEvent();
+		if (timer != null) timer.OnTimerEnd += InvokeEvent;
+		if (isStartingOnEnable) Start();
 	}
 
 	private void OnDisable()
@@ -28,20 +41,8 @@ public class UnityEventTimer : MonoBehaviour
 		onTimerEnd?.Invoke();
 	}
 
-	private void Update()
-	{
-		timer.Update();
-	}
-	
-	public void Start()
-	{
-		timer.Start();
-	}
-	
 	public void Pause()
 	{
 		timer.Pause();
 	}
-	
-	
 }

@@ -12,6 +12,7 @@ namespace Entities_Scripts
         {
             TakenDamage += damage;
             onTakeDamage?.Invoke();
+            Debug.Log("Boom! : " + TakenDamage);
         }
     }
 }

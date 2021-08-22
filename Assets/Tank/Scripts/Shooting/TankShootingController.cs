@@ -1,6 +1,5 @@
-using System;
+using Tank.Scripts.Shooting.ExplosionScripts;
 using Tank.Scripts.Shooting.Gun;
-using UnityEditor.IMGUI.Controls;
 using UnityEngine;
 
 namespace Tank.Scripts.Shooting
@@ -9,6 +8,7 @@ namespace Tank.Scripts.Shooting
 	public class TankShootingController : MonoBehaviour
 	{
 		[SerializeField] public float reloadingTime = 1;
+		[SerializeField] public ExplosionData explosionData;
 		public ParticleEffectHandler ParticleEffectHandler { get; private set; }
 		public IShootingHandler ShootingHandler { get; private set; }
 		
@@ -24,6 +24,7 @@ namespace Tank.Scripts.Shooting
 		{
 			gamepadHandler = GetComponent<IGamepadHandler>();
 			ShootingHandler = GetComponent<IShootingHandler>();
+			ShootingHandler.ExplosionData(explosionData);
 			ParticleEffectHandler = GetComponent<ParticleEffectHandler>();
 
 			gamepadHandler.OnShoot += HandleShooting;
