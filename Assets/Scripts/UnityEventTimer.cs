@@ -1,5 +1,6 @@
 using UnityEngine;
 using UnityEngine.Events;
+using s1nu5;
 
 public class UnityEventTimer : MonoBehaviour
 {
@@ -20,10 +21,8 @@ public class UnityEventTimer : MonoBehaviour
 
 	private void Update()
 	{
-		timer.Update();
+		timer.Update(Time.deltaTime);
 	}
-
-	//todo tu się pomyśli
 	private void OnEnable()
 	{
 		onTimerEnd = new UnityEvent();

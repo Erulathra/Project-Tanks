@@ -1,6 +1,6 @@
+using ExplosionScripts;
 using Pool;
 using Tank.Scripts.Shooting.ExplosionScripts;
-using Unity.VisualScripting;
 using UnityEngine;
 
 namespace Entities_Scripts
@@ -21,9 +21,9 @@ namespace Entities_Scripts
             var explosionScript = explosion.GetComponent<Explosion>();
             AddPoolTimerComponentToExplosionObject(explosionScript);
 
-            this.gameObject.SetActive(false);
+            gameObject.SetActive(false);
             explosionScript.Explode();
-            Destroy(this.gameObject);
+            Destroy(gameObject);
         }
         
         private GameObject GetExplosionObject()

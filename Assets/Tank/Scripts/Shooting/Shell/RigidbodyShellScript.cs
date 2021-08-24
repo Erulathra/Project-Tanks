@@ -1,6 +1,9 @@
+using ExplosionScripts;
 using Pool;
 using Tank.Scripts.Shooting.ExplosionScripts;
 using UnityEngine;
+using s1nu5;
+
 
 namespace Tank.Scripts.Shooting.Shell
 {
@@ -23,7 +26,7 @@ namespace Tank.Scripts.Shooting.Shell
 
 		private void Update()
 		{
-			explodeTimer.Update();
+			explodeTimer.Update(Time.deltaTime);
 		}
 
 		private void OnEnable()

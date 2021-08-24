@@ -1,53 +1,60 @@
 using System;
 using UnityEngine;
 
-public class Timer
+namespace s1nu5
 {
-	public event Action OnTimerEnd;
-	private readonly float timeToEnd;
-	private float remainingSeconds;
+	public class Timer
+   {
+   	public event Action OnTimerEnd;
+      private bool wasInvoked;
+   	
+      public float TimeToEnd { get; }
 
-	private bool isTicking;
-	private bool wasInvoked;
-	
-	public Timer(float remainingSeconds)
-	{
-		timeToEnd = remainingSeconds;
-		ResetTimer();
-		isTicking = false;
-		wasInvoked = false;
-	}
-		
-	public void Update()
-	{
-		if (isTicking == false) return; 
-		remainingSeconds -= Time.deltaTime;
-		InvokeEventWhenTimesUp();
-	}
+      public float RemainingSeconds { get; private set; }
 
-	private void InvokeEventWhenTimesUp()
-	{
-		if (remainingSeconds > 0) return;
-		if (wasInvoked) return;
-		OnTimerEnd?.Invoke();
-		wasInvoked = true;
-	}
+      public bool IsTicking { get; private set; }
 
-	public void ResetTimer()
-	{
-		isTicking = false;
-		wasInvoked = false;
-		remainingSeconds = timeToEnd;
-	}
-
-	public void Start()
-	{
-		isTicking = true;
-	}
-	
-	public void Pause()
-	{
-		isTicking = false;
-	}
-		
+      public bool WasInvoked => wasInvoked;
+      
+   	public Timer(float remainingSeconds)
+   	{
+   		TimeToEnd = remainingSeconds;
+   		ResetTimer();
+   		IsTicking = false;
+   		wasInvoked = false;
+   	}
+   		
+   	public void Update(float deltaTime)
+   	{
+   		if (IsTicking == false) return; 
+   		RemainingSeconds -= Time.deltaTime;
+   		InvokeEventWhenTimesUp();
+   	}
+   
+   	private void InvokeEventWhenTimesUp()
+   	{
+   		if (RemainingSeconds > 0) return;
+   		if (wasInvoked) return;
+   		OnTimerEnd?.Invoke();
+   		wasInvoked = true;
+   	}
+   
+   	public void ResetTimer()
+   	{
+   		IsTicking = false;
+   		wasInvoked = false;
+   		RemainingSeconds = TimeToEnd;
+   	}
+   
+   	public void Start()
+   	{
+   		IsTicking = true;
+   	}
+   	
+   	public void Pause()
+   	{
+   		IsTicking = false;
+   	}
+   		
+   }
 }

@@ -1,8 +1,10 @@
 using Entities_Scripts;
 using Pool;
+using Tank.Scripts.Shooting;
+using Tank.Scripts.Shooting.ExplosionScripts;
 using UnityEngine;
 
-namespace Tank.Scripts.Shooting.ExplosionScripts
+namespace ExplosionScripts
 {
 	public class Explosion : MonoBehaviour
 	{
