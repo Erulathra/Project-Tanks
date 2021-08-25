@@ -1,12 +1,10 @@
 using System;
-using UnityEngine;
 
 namespace s1nu5
 {
 	public class Timer
    {
    	public event Action OnTimerEnd;
-      private bool wasInvoked;
    	
       public float TimeToEnd { get; }
 
@@ -14,37 +12,40 @@ namespace s1nu5
 
       public bool IsTicking { get; private set; }
 
-      public bool WasInvoked => wasInvoked;
       
    	public Timer(float remainingSeconds)
    	{
    		TimeToEnd = remainingSeconds;
-   		ResetTimer();
+   		Stop();
    		IsTicking = false;
-   		wasInvoked = false;
    	}
    		
    	public void Update(float deltaTime)
    	{
-   		if (IsTicking == false) return; 
-   		RemainingSeconds -= Time.deltaTime;
-   		InvokeEventWhenTimesUp();
+   		if (IsTicking == false) return;
+	      RemainingSeconds -= deltaTime;
+	      StopRemainingSecondsAtZero();
+	      InvokeEventWhenTimesUp();
    	}
-   
-   	private void InvokeEventWhenTimesUp()
+
+      private void StopRemainingSecondsAtZero()
+      {
+	      if (RemainingSeconds < 0) RemainingSeconds = 0;
+      }
+
+      private void InvokeEventWhenTimesUp()
    	{
    		if (RemainingSeconds > 0) return;
-   		if (wasInvoked) return;
    		OnTimerEnd?.Invoke();
-   		wasInvoked = true;
-   	}
+         Pause();
+      }
    
-   	public void ResetTimer()
+   	public void Stop()
    	{
    		IsTicking = false;
-   		wasInvoked = false;
    		RemainingSeconds = TimeToEnd;
-   	}
+         Pause();
+      }
    
    	public void Start()
    	{
