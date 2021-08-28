@@ -12,8 +12,8 @@ namespace Tank.Scripts
 		[SerializeField] private Transform muzzle;
 		[SerializeField] private Transform tower;
 
-		[SerializeField] private ObjectPoolManager shellPool;
-		[SerializeField] private ObjectPoolManager explosionPool;
+		private ObjectPoolManager shellPool;
+		private ObjectPoolManager explosionPool;
 
 		[SerializeField] private float shellStartVelocity = 10f;
 		[SerializeField] private float gunCounterForce = 50f;
@@ -29,6 +29,9 @@ namespace Tank.Scripts
 
 		private void Awake()
 		{
+			shellPool = GameObject.FindGameObjectWithTag("ShellPool").GetComponent<ObjectPoolManager>();
+			explosionPool = GameObject.FindGameObjectWithTag("ExplosionPool").GetComponent<ObjectPoolManager>();
+
 			rigidbody = GetComponent<Rigidbody>();
 		}
 

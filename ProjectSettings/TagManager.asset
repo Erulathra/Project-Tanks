@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ExplosionPool
   - Explosion
+  - ShellPool
   layers:
   - Default
   - TransparentFX
