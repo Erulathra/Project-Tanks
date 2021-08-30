@@ -10,8 +10,6 @@ namespace Tank.Scripts
 		private float rightAnalogDeadZone = 0.1f;
 
 		[SerializeField] private float leftAnalogDeadZone = 0.1f;
-
-		private TankKeyMap tankKeyMap;
 		
 		public Vector2 AimVector { get; private set; }
 		public Vector2 MoveVector { get; private set; }

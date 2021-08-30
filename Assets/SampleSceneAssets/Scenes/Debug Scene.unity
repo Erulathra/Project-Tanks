@@ -28117,7 +28117,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 90
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -28142,7 +28142,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1530338902}
-  m_LocalRotation: {x: 0.47167203, y: -1e-45, z: 0, w: 0.8817741}
+  m_LocalRotation: {x: 0.47167203, y: -1e-45, z: 0, w: 0.88177407}
   m_LocalPosition: {x: -12, y: 22.75, z: -36.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
@@ -32073,7 +32073,7 @@ LightingSettings:
   m_BounceScale: 1
   m_AlbedoBoost: 1
   m_IndirectOutputScale: 1
-  m_UsingShadowmask: 1
+  m_UsingShadowmask: 0
   m_BakeBackend: 2
   m_LightmapMaxSize: 1024
   m_BakeResolution: 40
@@ -32084,7 +32084,7 @@ LightingSettings:
   m_CompAOExponent: 1
   m_CompAOExponentDirect: 0
   m_ExtractAO: 0
-  m_MixedBakeMode: 2
+  m_MixedBakeMode: 0
   m_LightmapsBakeMode: 1
   m_FilterMode: 1
   m_LightmapParameters: {fileID: 15204, guid: 0000000000000000f000000000000000, type: 0}
@@ -32132,7 +32132,7 @@ GameObject:
   - component: {fileID: 1678664816}
   m_Layer: 0
   m_Name: ShellPool
-  m_TagString: Untagged
+  m_TagString: ShellPool
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
   m_StaticEditorFlags: 0
@@ -34482,7 +34482,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1718857727}
-  m_LocalRotation: {x: 0.47167203, y: -1e-45, z: -0, w: 0.8817741}
+  m_LocalRotation: {x: 0.47167203, y: -1e-45, z: -0, w: 0.88177407}
   m_LocalPosition: {x: -12, y: 22.75, z: -36.77}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -35677,7 +35677,7 @@ Mesh:
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
-  m_Name: pb_Mesh30214
+  m_Name: pb_Mesh30218
   serializedVersion: 10
   m_SubMeshes:
   - serializedVersion: 2
