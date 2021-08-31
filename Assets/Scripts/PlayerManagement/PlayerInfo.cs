@@ -23,52 +23,18 @@ namespace PlayerManagement
 	{
 		
 	}
-
+	
 	public class PlayerInfo : MonoBehaviour
 	{
 		public Player[] Players { get; private set; }
 
 		private void Start()
 		{
-			InitialiseGame();
-		}
-
-		private void Update()
-		{
-			SearchForNewPlayers();
-		}
-
-		private void InitialiseGame()
-		{
+			DontDestroyOnLoad(gameObject);
 			Players = new Player[4];
 		}
 
-
-		private void SearchForNewPlayers()
-		{
-			SearchForGamepads();
-			SearchForKeyboards();
-		}
-
-		private void SearchForKeyboards()
-		{
-			var keyboard = Keyboard.current;
-			if (keyboard.enterKey.wasReleasedThisFrame)
-			{
-				AddPlayerWhenItWasNotAdded(keyboard, PlayerControllerType.MouseAndKeyboard);
-			}
-		}
-
-		private void SearchForGamepads()
-		{
-			var gamepad = Gamepad.current;
-			if (gamepad.startButton.wasReleasedThisFrame)
-			{
-				AddPlayerWhenItWasNotAdded(gamepad, PlayerControllerType.Gamepad);
-			}
-		}
-
-		private void AddPlayerWhenItWasNotAdded(InputDevice device, PlayerControllerType type)
+		public void AddPlayerWhenItWasNotAdded(InputDevice device, PlayerControllerType type)
 		{
 			if (WasDeviceAdded(device)) return;
 			AddPlayer(device, type);
@@ -78,14 +44,19 @@ namespace PlayerManagement
 		{
 			try
 			{
-				var place = FindFreePlaceForPlayer();
-				Players[place].InputDevice = device;
-				Players[place].playerControllerType = type;
+				TryAddPlayer(device, type);
 			}
 			catch (PlayerListIsFullException)
 			{
-				return;
+				Debug.Log("PlayerList is Full");
 			}
+		}
+
+		private void TryAddPlayer(InputDevice device, PlayerControllerType type)
+		{
+			var place = FindFreePlaceForPlayer();
+			Players[place].InputDevice = device;
+			Players[place].playerControllerType = type;
 		}
 
 		private int FindFreePlaceForPlayer()
