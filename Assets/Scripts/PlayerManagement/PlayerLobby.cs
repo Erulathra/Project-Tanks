@@ -9,7 +9,6 @@ namespace PlayerManagement
 		
 		private void Start()
 		{
-			playerInfo = GetComponent<PlayerInfo>();
 		}
 
 		private void Update()

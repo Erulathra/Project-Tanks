@@ -4,7 +4,6 @@ using UnityEngine.Serialization;
 
 namespace Tank.Scripts
 {
-	[RequireComponent(typeof(GamepadHandler))]
 	public class TankMovementController : MonoBehaviour
 	{
 		[FormerlySerializedAs("tower")] [SerializeField]

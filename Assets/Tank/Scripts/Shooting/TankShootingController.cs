@@ -4,7 +4,6 @@ using UnityEngine;
 
 namespace Tank.Scripts.Shooting
 {
-	[RequireComponent(typeof(GamepadHandler))]
 	public class TankShootingController : MonoBehaviour
 	{
 		[SerializeField] public float reloadingTime = 1;

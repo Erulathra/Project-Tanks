@@ -666,8 +666,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 9194128925547506682}
   tower: {fileID: 6788928994223911664}
-  shellPool: {fileID: 0}
-  explosionPool: {fileID: 0}
   shellStartVelocity: 18
   gunCounterForce: 50000
 --- !u!114 &9194128925352552338
