@@ -7,10 +7,6 @@ namespace PlayerManagement
 	{
 		[SerializeField] private PlayerInfo playerInfo;
 		
-		private void Start()
-		{
-		}
-
 		private void Update()
 		{
 			SearchForNewPlayers();

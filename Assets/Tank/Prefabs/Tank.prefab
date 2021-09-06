@@ -497,7 +497,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_Actions: {fileID: -944628639613478452, guid: 8e74ba718b707794c83ef6b320799beb, type: 3}
-  m_NotificationBehavior: 2
+  m_NotificationBehavior: 0
   m_UIInputModule: {fileID: 0}
   m_DeviceLostEvent:
     m_PersistentCalls:
@@ -627,7 +627,7 @@ MonoBehaviour:
   towerRotationSpeed: 5
   motorForce: 2500
   maxSpeed: 5
-  motorResistance: 10
+  motorResistance: 1000
   breakingForce: 5000
   steerAngle: 80
   frontRightWheel: {fileID: 9194128926547561330}
@@ -680,8 +680,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2abdea96c1bf5b54eb80316f795b87c3, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  rightAnalogDeadZone: 0.1
-  leftAnalogDeadZone: 0.1
 --- !u!114 &9194128925352552349
 MonoBehaviour:
   m_ObjectHideFlags: 0

@@ -11,7 +11,7 @@ namespace Tank.Scripts.Shooting
 		public ParticleEffectHandler ParticleEffectHandler { get; private set; }
 		public IShootingHandler ShootingHandler { get; private set; }
 		
-		private IGamepadHandler gamepadHandler;
+		private IInputHandler inputHandler;
 		private IGunState gunState;
 		
 		private void Start()
@@ -21,12 +21,12 @@ namespace Tank.Scripts.Shooting
 
 		private void PrepareThisComponent()
 		{
-			gamepadHandler = GetComponent<IGamepadHandler>();
+			inputHandler = GetComponent<IInputHandler>();
 			ShootingHandler = GetComponent<IShootingHandler>();
 			ShootingHandler.ExplosionData(explosionData);
 			ParticleEffectHandler = GetComponent<ParticleEffectHandler>();
 
-			gamepadHandler.OnShoot += HandleShooting;
+			inputHandler.OnShootEvent += HandleShooting;
 			gunState = new ReadyToShootGunState();
 		}
 
@@ -37,7 +37,7 @@ namespace Tank.Scripts.Shooting
 
 		private void OnDestroy()
 		{
-			gamepadHandler.OnShoot -= HandleShooting;
+			inputHandler.OnShootEvent -= HandleShooting;
 		}
 		
 		private void HandleShooting()

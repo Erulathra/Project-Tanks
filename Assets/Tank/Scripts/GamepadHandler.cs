@@ -1,54 +1,48 @@
 using System;
+using PlayerManagement;
 using UnityEngine;
 using UnityEngine.InputSystem;
 
 namespace Tank.Scripts
 {
-	public class GamepadHandler : MonoBehaviour, IGamepadHandler
+	public class GamepadHandler : MonoBehaviour, IInputHandler
 	{
-		[Header("Gamepad variables")] [SerializeField]
-		private float rightAnalogDeadZone = 0.1f;
-
-		[SerializeField] private float leftAnalogDeadZone = 0.1f;
-		
 		public Vector2 AimVector { get; private set; }
 		public Vector2 MoveVector { get; private set; }
 		public float AccelerateFront { get; private set; }
 		public float AccelerateBack { get; private set; }
 		public bool IsBreaking { get; private set; }
 		public bool IsShooting { get; private set; }
-		public event Action OnShoot;
+		public event Action OnShootEvent;
 		
-		public void OnHandBrake(InputAction.CallbackContext ctx)
+		public void OnHandBrake(InputValue value)
 		{
-			IsBreaking = true;
+			IsBreaking = value.Get<float>() > 0;
+		}
+		
+		public void OnShoot(InputValue value)
+		{
+			OnShootEvent?.Invoke();
 		}
 
-		public void Shoot(InputAction.CallbackContext ctx)
+		public void OnAccelerateBack(InputValue value)
 		{
-			OnShoot?.Invoke();
+			AccelerateBack = value.Get<float>();
 		}
 
-		public void OnAccelerateBack(InputAction.CallbackContext ctx)
+		public void OnAccelerateFront(InputValue value)
 		{
-			AccelerateBack = ctx.ReadValue<float>();
+			AccelerateFront = value.Get<float>();
 		}
 
-		public void OnAccelerateFront(InputAction.CallbackContext ctx)
+		public void OnMove(InputValue value)
 		{
-			AccelerateFront = ctx.ReadValue<float>();
+			MoveVector = value.Get<Vector2>();
 		}
 
-		public void OnMove(InputAction.CallbackContext ctx)
+		public void OnAim(InputValue value)
 		{
-			MoveVector = ctx.ReadValue<Vector2>();
-			if (MoveVector.magnitude < rightAnalogDeadZone) MoveVector = Vector2.zero;
-		}
-
-		public void OnAim(InputAction.CallbackContext ctx)
-		{
-			AimVector = ctx.ReadValue<Vector2>();
-			if (AimVector.magnitude < leftAnalogDeadZone) AimVector = Vector2.zero;
+			AimVector = value.Get<Vector2>();
 		}
 
 	}

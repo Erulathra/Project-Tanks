@@ -6,14 +6,14 @@ namespace Tank.Scripts
 {
 	public class AimHandler
 	{
-		[NotNull] private readonly IGamepadHandler gamepad;
+		[NotNull] private readonly IInputHandler input;
 		private readonly Transform tankTransform;
 		private readonly float towerRotationSpeed;
 		private readonly Transform towerTransform;
 
 		public AimHandler(TankMovementController tankMovementController)
 		{
-			gamepad = tankMovementController.GamepadHandler;
+			input = tankMovementController.InputHandler;
 			towerTransform = tankMovementController.TowerTransform;
 			tankTransform = tankMovementController.transform;
 			towerRotationSpeed = tankMovementController.TowerRotationSpeed;
@@ -21,9 +21,9 @@ namespace Tank.Scripts
 
 		public void HandleAim()
 		{
-			if (gamepad.AimVector == Vector2.zero) return;
+			if (input.AimVector == Vector2.zero) return;
 
-			var angle = Vector2ToAngle(gamepad.AimVector);
+			var angle = Vector2ToAngle(input.AimVector);
 
 			var newRotation = towerTransform.localEulerAngles;
 			newRotation.y = Mathf.LerpAngle(newRotation.y, angle - tankTransform.eulerAngles.y + 90,

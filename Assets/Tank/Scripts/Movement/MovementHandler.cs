@@ -9,7 +9,7 @@ namespace Tank.Scripts
 		private readonly WheelCollider frontLeftWheel;
 
 		private readonly WheelCollider frontRightWheel;
-		private readonly IGamepadHandler gamepad;
+		private readonly IInputHandler input;
 		private readonly float maxSpeed;
 
 		private readonly float motorForce;
@@ -23,7 +23,7 @@ namespace Tank.Scripts
 
 		public MovementHandler(TankMovementController tankMovementController)
 		{
-			gamepad = tankMovementController.GamepadHandler;
+			input = tankMovementController.InputHandler;
 			tankRigidBody = tankMovementController.TankRigidBody;
 
 			motorForce = tankMovementController.MotorForce;
@@ -55,12 +55,12 @@ namespace Tank.Scripts
 
 		private bool IsBreaking()
 		{
-			return isBreaking || gamepad.IsBreaking;
+			return isBreaking || input.IsBreaking;
 		}
 
 		private float Acceleration()
 		{
-			return gamepad.AccelerateFront - gamepad.AccelerateBack;
+			return input.AccelerateFront - input.AccelerateBack;
 		}
 		
 		private void BrakeWhenAccelerateInAnotherDirection(float acceleration)
@@ -85,7 +85,7 @@ namespace Tank.Scripts
 
 		public void HandleSteering()
 		{
-			var actualSteerAngle = gamepad.MoveVector.x * steerAngle;
+			var actualSteerAngle = input.MoveVector.x * steerAngle;
 			frontLeftWheel.steerAngle = actualSteerAngle;
 			frontRightWheel.steerAngle = actualSteerAngle;
 		}
@@ -93,7 +93,9 @@ namespace Tank.Scripts
 		public void HandleIdleMotorResistance()
 		{
 			if (Acceleration() == 0 && tankRigidBody.velocity.magnitude != 0)
+			{
 				ApplyBreaking(motorResistance);
+			}
 		}
 	}
 }

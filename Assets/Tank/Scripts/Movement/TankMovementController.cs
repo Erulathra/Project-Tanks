@@ -29,13 +29,13 @@ namespace Tank.Scripts
 
 		private MovementHandler movementHandler;
 		private AimHandler aimHandler;
-		public IGamepadHandler GamepadHandler { get; private set; }
+		public IInputHandler InputHandler { get; private set; }
 
 		private void Start()
 		{
 			TankRigidBody = GetComponent<Rigidbody>();
-			GamepadHandler = GetComponent<IGamepadHandler>();
-			if (GamepadHandler == null) throw new NullReferenceException("gamepadHandler");
+			InputHandler = GetComponent<IInputHandler>();
+			if (InputHandler == null) throw new NullReferenceException("gamepadHandler");
 
 			movementHandler = new MovementHandler(this);
 			aimHandler = new AimHandler(this);
