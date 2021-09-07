@@ -73,4 +73,5 @@ crashlytics-build.properties
 #My Ignores
 .idea
 .erp
-Assets/Fonts/Ubuntu Nerd Font Complete SDF.asset 
+Assets/Fonts/Ubuntu Nerd Font Complete SDF.asset
+bfg.jar
