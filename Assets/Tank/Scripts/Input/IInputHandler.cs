@@ -1,7 +1,7 @@
 using System;
 using UnityEngine;
 
-namespace Tank.Scripts
+namespace Tank.Scripts.Input
 {
 	public interface IInputHandler
 	{

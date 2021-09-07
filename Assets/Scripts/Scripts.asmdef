@@ -1,9 +1,8 @@
 {
-    "name": "Timers",
+    "name": "Scripts",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:6055be8ebefd69e48b49212b09b47b2f"
+        "GUID:1c05e3902a0c5d94695e4f20a54ac9bd"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

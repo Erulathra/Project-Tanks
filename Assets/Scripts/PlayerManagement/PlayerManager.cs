@@ -1,9 +1,11 @@
 using System;
 using System.Collections.Generic;
-using System.Security.Cryptography;
 using PlayerManagement;
+using Tank.Scripts;
 using UnityEngine;
 using UnityEngine.InputSystem;
+
+using Tank.Scripts.Input;
 
 public class PlayerManager : MonoBehaviour
 {
@@ -39,8 +41,8 @@ public class PlayerManager : MonoBehaviour
 	private void InstantiatePlayerGameObject(Player player)
 	{
 		GameObject playerGameObject;
-		if (player.playerControllerType == PlayerControllerType.Gamepad) playerGameObject = InstantiatePlayerGameObjectAndAddGamepadHandler(player);
-		else if (player.playerControllerType == PlayerControllerType.MouseAndKeyboard) throw new NotImplementedException();
+		if (player.playerControllerType == PlayerControllerType.Gamepad) playerGameObject = InstantiatePlayerGameObjectAndAddGamepadAimHandler(player);
+		else if (player.playerControllerType == PlayerControllerType.MouseAndKeyboard)playerGameObject = InstantiatePlayerGameObjectAndAddMouseAimHandler(player);
 		else if (player.playerControllerType == PlayerControllerType.None) return;
 		else throw new NotImplementedException();
 
@@ -48,10 +50,23 @@ public class PlayerManager : MonoBehaviour
 		AssingDevice(player, playerGameObject);
 	}
 	
-	private GameObject InstantiatePlayerGameObjectAndAddGamepadHandler(Player player)
+	private GameObject InstantiatePlayerGameObjectAndAddGamepadAimHandler(Player player)
 	{
 		var playerGameObject = Instantiate(playerPrefab);
-		//gameObject.AddComponent<GamepadHandler>(); //TODO Tu też trzeba poprawić
+		return playerGameObject;
+	}
+	
+	private GameObject InstantiatePlayerGameObjectAndAddMouseAimHandler(Player player)
+	{
+		var playerGameObject = Instantiate(playerPrefab);
+		
+		//TODO wyczyścić ten kod
+		Destroy(playerGameObject.GetComponent<GamepadAimHandler>());
+		var mouseAimHandler = playerGameObject.AddComponent<MouseAimHandler>();
+		var inputHandler = playerGameObject.GetComponent<InputHandler>();
+		inputHandler.AimHandler = mouseAimHandler;
+		
+
 		return playerGameObject;
 	}
 
@@ -66,10 +81,20 @@ public class PlayerManager : MonoBehaviour
 		spawnPointIndex++;
 		return spawnPoint.position;
 	}
-
+//Todo czyszcenie kodu
 	private void AssingDevice(Player player, GameObject playerGameObject)
 	{
 		var playerInput = playerGameObject.GetComponent<PlayerInput>();
-		playerInput.SwitchCurrentControlScheme(player.InputDevice);
+		if (player.playerControllerType == PlayerControllerType.Gamepad)
+		{
+			playerInput.SwitchCurrentControlScheme(player.InputDevice);
+		}
+		else
+		{
+			InputDevice[] inputDevices = new InputDevice[2];
+			inputDevices[0] = player.InputDevice;
+			inputDevices[1] = Mouse.current;
+			playerInput.SwitchCurrentControlScheme(inputDevices);
+		}
 	}
 }

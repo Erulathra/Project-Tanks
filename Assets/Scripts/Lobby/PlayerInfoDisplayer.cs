@@ -10,7 +10,7 @@ public class PlayerInfoDisplayer : MonoBehaviour
 
     private const string NoneIcon = "諸";
     private const string GamepadIcon = "調";
-    private const string KeyboardIcon = "";
+    private const string KeyboardIcon = "";
     
     private void Update()
     {

@@ -22,11 +22,17 @@ namespace Entities_Scripts
             var explosionScript = explosion.GetComponent<Explosion>();
             AddPoolTimerComponentToExplosionObject(explosionScript);
 
-            gameObject.SetActive(false);
-            explosionScript.Explode();
-            Destroy(gameObject);
+            DestroyThis(explosionScript);
         }
-        
+
+        private void DestroyThis(Explosion explosionScript)
+        {
+            GameObject o;
+            (o = gameObject).SetActive(false);
+            explosionScript.Explode();
+            Destroy(o);
+        }
+
         private GameObject GetExplosionObject()
         {
             var explosion = explosionPool.GetObject();

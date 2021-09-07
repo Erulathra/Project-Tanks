@@ -1,12 +1,9 @@
 {
-    "name": "TankAssembly",
+    "name": "Lobby",
     "rootNamespace": "",
     "references": [
-        "GUID:75469ad4d38634e559750d17036d5f7c",
-        "GUID:8c33e7d4dcd7c914e9e66f2748c8e7e2",
-        "GUID:d43a5d013eba3de4bbf09dee06dee531",
-        "GUID:35905dc2bc46a7f459b6d7a51b3ca9cf",
-        "GUID:cf9ef747e97345040b59f0350e59632c"
+        "GUID:6dd71b212fc1d71418153bbe3f30bf63",
+        "GUID:6055be8ebefd69e48b49212b09b47b2f"
     ],
     "includePlatforms": [],
     "excludePlatforms": [],

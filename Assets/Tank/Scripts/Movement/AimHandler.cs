@@ -1,5 +1,6 @@
 using System;
 using JetBrains.Annotations;
+using Tank.Scripts.Input;
 using UnityEngine;
 
 namespace Tank.Scripts
