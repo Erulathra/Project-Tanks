@@ -27,23 +27,18 @@ namespace Tank.Scripts.Shooting
 			ShootingHandler.ExplosionData(explosionData);
 			ParticleEffectHandler = GetComponent<ParticleEffectHandler>();
 
-			inputHandler.OnShootEvent += HandleShooting;
 			gunState = new ReadyToShootGunState();
 		}
 
 		private void Update()
 		{
 			gunState.Update();
-		}
-
-		private void OnDestroy()
-		{
-			inputHandler.OnShootEvent -= HandleShooting;
+			if (inputHandler.IsShooting)
+			{
+				gunState = gunState.DoState(this);
+			}
+			
 		}
 		
-		private void HandleShooting()
-		{
-			gunState = gunState.DoState(this);
-		}
 	}
 }

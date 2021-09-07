@@ -24,17 +24,17 @@ namespace Tank.Scripts.Input
 		private void Update()
 		{
 			AimVector = AimHandler.AimVector;
-			var playerInput = GetComponent<PlayerInput>();
-			if(playerInput.devices[0] == Mouse.current) Debug.Log("Using Mouse");
 		}
 		
+
 		private void OnHandBrake(InputValue value)
 		{
-			IsBreaking = value.Get<float>() > 0;
+			IsBreaking = value.isPressed;
 		}
 
 		private void OnShoot(InputValue value)
 		{
+			IsShooting = value.isPressed;
 			OnShootEvent?.Invoke();
 		}
 

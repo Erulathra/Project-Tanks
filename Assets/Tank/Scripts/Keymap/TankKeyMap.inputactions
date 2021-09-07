@@ -23,7 +23,7 @@
                 },
                 {
                     "name": "Shoot",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "4ae9608a-e450-4662-8550-a853ba8bb2ab",
                     "expectedControlType": "Button",
                     "processors": "",
@@ -47,7 +47,7 @@
                 },
                 {
                     "name": "HandBrake",
-                    "type": "Button",
+                    "type": "Value",
                     "id": "a92ad80c-74ed-4b7c-a0e6-40f7fac45433",
                     "expectedControlType": "Button",
                     "processors": "",

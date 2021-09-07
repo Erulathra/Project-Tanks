@@ -7,6 +7,7 @@ using UnityEngine.InputSystem;
 
 using Tank.Scripts.Input;
 
+//TODO SPRZATACZKA rozbić na więcej klas
 public class PlayerManager : MonoBehaviour
 {
 	[SerializeField] private GameObject playerPrefab;
@@ -59,15 +60,17 @@ public class PlayerManager : MonoBehaviour
 	private GameObject InstantiatePlayerGameObjectAndAddMouseAimHandler(Player player)
 	{
 		var playerGameObject = Instantiate(playerPrefab);
-		
-		//TODO wyczyścić ten kod
 		Destroy(playerGameObject.GetComponent<GamepadAimHandler>());
+		AddMouseAimHandlerTo(playerGameObject);
+
+		return playerGameObject;
+	}
+
+	private static void AddMouseAimHandlerTo(GameObject playerGameObject)
+	{
 		var mouseAimHandler = playerGameObject.AddComponent<MouseAimHandler>();
 		var inputHandler = playerGameObject.GetComponent<InputHandler>();
 		inputHandler.AimHandler = mouseAimHandler;
-		
-
-		return playerGameObject;
 	}
 
 	private void MoveToSpawnPoint(GameObject playerGameObject)
