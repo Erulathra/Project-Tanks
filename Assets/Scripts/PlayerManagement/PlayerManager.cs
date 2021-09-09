@@ -1,5 +1,7 @@
 using System;
 using System.Collections.Generic;
+using PlayerManagement.PlayerGameObjectBuilder;
+using PlayerManagement.SpawnPointHandler;
 using UnityEngine;
 
 namespace PlayerManagement
@@ -7,14 +9,11 @@ namespace PlayerManagement
 	public class PlayerManager : MonoBehaviour
 	{
 		[SerializeField] private GameObject playerPrefab;
-		[SerializeField] private Transform spawnPointParent;
-
 
 		private PlayerInfo playerInfo;
 		private List<GameObject> playersGameObjects;
 
-		private int spawnPointIndex; //TODO zamienić na interfejs
-		private List<Transform> spawnPoints;
+		private ISpawnPointHandler spawnPointHandler;
 
 		//TODO Dodawanie do kamery
 		private void Start()
@@ -24,31 +23,33 @@ namespace PlayerManagement
 
 			playerInfo = playerSettings.GetComponent<PlayerInfo>();
 
-			spawnPoints = new List<Transform>();
-			foreach (Transform child in spawnPointParent) spawnPoints.Add(child);
+			spawnPointHandler = GetComponent<ISpawnPointHandler>();
 
 			SpawnPlayersAndAssingDevices();
 		}
 
 		private void SpawnPlayersAndAssingDevices()
 		{
-			foreach (var player in playerInfo.Players) InstantiatePlayerGameObject(player);
+			foreach (var player in playerInfo.Players) TryInstantiatePlayerGameObject(player);
+		}
+
+		private void TryInstantiatePlayerGameObject(Player player)
+		{
+			try
+			{
+				InstantiatePlayerGameObject(player);
+			}
+			catch (NoneControllerException)
+			{ }
 		}
 
 		private void InstantiatePlayerGameObject(Player player)
 		{
-			try
-			{
-				IPlayerGameObjectBuilder playerGameObjectBuilder = CreatePlayerGameObjectBuilder(player);
-				playerGameObjectBuilder.Reset(playerPrefab, player);
-				playerGameObjectBuilder.AddAimHandler();
-				playerGameObjectBuilder.AssingController();
-				playerGameObjectBuilder.MoveToSpawnPoint(GetSpawnPoint());
-			}
-			catch(NoneControllerException)
-			{
-				return;
-			}
+			IPlayerGameObjectBuilder playerGameObjectBuilder = CreatePlayerGameObjectBuilder(player);
+			playerGameObjectBuilder.Reset(playerPrefab, player);
+			playerGameObjectBuilder.AddAimHandler();
+			playerGameObjectBuilder.AssingController();
+			playerGameObjectBuilder.MoveToSpawnPoint(spawnPointHandler.GetSpawnPoint());
 		}
 
 		private IPlayerGameObjectBuilder CreatePlayerGameObjectBuilder(Player player)
@@ -64,15 +65,8 @@ namespace PlayerManagement
 				throw new NotImplementedException();
 			return playerGameObjectBuilder;
 		}
-
-		private Vector3 GetSpawnPoint()
-		{
-			var spawnPoint = spawnPoints[spawnPointIndex];
-			spawnPointIndex++;
-			return spawnPoint.position;
-		}
 	}
-	
+
 	internal class NoneControllerException : Exception
 	{
 	

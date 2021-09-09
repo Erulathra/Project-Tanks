@@ -1,4 +1,5 @@
 using PlayerManagement;
+using PlayerManagement.PlayerGameObjectBuilder;
 using UnityEngine;
 
 public abstract class PlayerGameObjectBuilder : MonoBehaviour, IPlayerGameObjectBuilder

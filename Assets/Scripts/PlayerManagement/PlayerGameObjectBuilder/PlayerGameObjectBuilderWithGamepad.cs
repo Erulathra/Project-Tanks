@@ -1,13 +1,16 @@
 using UnityEngine.InputSystem;
 
-public class PlayerGameObjectBuilderWithGamepad : PlayerGameObjectBuilder
+namespace PlayerManagement.PlayerGameObjectBuilder
 {
-	public override void AddAimHandler()
-	{ }
-	
-	public override void AssingController()
+	public class PlayerGameObjectBuilderWithGamepad : global::PlayerGameObjectBuilder
 	{
-		var playerInput = PlayerGameObject.GetComponent<PlayerInput>();
-		playerInput.SwitchCurrentControlScheme(Player.InputDevice);
+		public override void AddAimHandler()
+		{ }
+	
+		public override void AssingController()
+		{
+			var playerInput = PlayerGameObject.GetComponent<PlayerInput>();
+			playerInput.SwitchCurrentControlScheme(Player.InputDevice);
+		}
 	}
 }
