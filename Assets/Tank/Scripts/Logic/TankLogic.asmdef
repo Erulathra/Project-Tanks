@@ -1,0 +1,19 @@
+{
+    "name": "TankLogic",
+    "rootNamespace": "",
+    "references": [
+        "GUID:16c59fe091383934a8fc3d6dcc72a6cf",
+        "GUID:cf9ef747e97345040b59f0350e59632c",
+        "GUID:d43a5d013eba3de4bbf09dee06dee531",
+        "GUID:8c33e7d4dcd7c914e9e66f2748c8e7e2"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}

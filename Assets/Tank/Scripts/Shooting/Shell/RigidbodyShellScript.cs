@@ -1,9 +1,7 @@
-using ExplosionScripts;
+using Entities_Scripts.ExplosionScripts;
 using Pool;
-using Tank.Scripts.Shooting.ExplosionScripts;
 using UnityEngine;
 using s1nu5;
-
 
 namespace Tank.Scripts.Shooting.Shell
 {
@@ -54,7 +52,6 @@ namespace Tank.Scripts.Shooting.Shell
 			var explosion = GetExplosionObject();
 			var explosionScript = explosion.GetComponent<Explosion>();
 			explosionScript.SetProperties(ExplosionData);
-			AddPoolTimerComponentToExplosionObject(explosionScript);
 			
 			explosionScript.Explode();
 		}
@@ -73,14 +70,6 @@ namespace Tank.Scripts.Shooting.Shell
 			var raycastShellCollisionsHandler = GetComponent<RaycastShellCollisionsHandler>();
 			if (raycastShellCollisionsHandler == null) return transform.position;
 			return raycastShellCollisionsHandler.GetHitPoint() == Vector3.zero ? transform.position : raycastShellCollisionsHandler.GetHitPoint();
-		}
-		
-		private void AddPoolTimerComponentToExplosionObject(Explosion explosionScript)
-		{
-			var returnToPoolTimer = explosionScript.gameObject.AddComponent<UnityEventTimer>();
-			returnToPoolTimer.timeToEnd = ExplosionData.lifeTime;
-			returnToPoolTimer.onTimerEnd.AddListener(explosionScript.ReturnToPool);
-			returnToPoolTimer.Start();
 		}
 
 		private void ResetParameters()

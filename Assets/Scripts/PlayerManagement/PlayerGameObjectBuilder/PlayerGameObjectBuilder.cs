@@ -1,3 +1,4 @@
+using Cinemachine;
 using PlayerManagement;
 using PlayerManagement.PlayerGameObjectBuilder;
 using UnityEngine;
@@ -24,5 +25,9 @@ public abstract class PlayerGameObjectBuilder : MonoBehaviour, IPlayerGameObject
 	{
 		PlayerGameObject.transform.position = spawnPointPosition;
 	}
-	
+
+	public void AddToTargetGroup(CinemachineTargetGroup targetGroup)
+	{
+		targetGroup.AddMember(PlayerGameObject.transform, 1f, 1f);
+	}
 }

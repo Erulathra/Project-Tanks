@@ -1,7 +1,6 @@
-using ExplosionScripts;
+using Entities_Scripts.ExplosionScripts;
 using Pool;
 using s1nu5;
-using Tank.Scripts.Shooting.ExplosionScripts;
 using UnityEngine;
 
 namespace Entities_Scripts
@@ -11,16 +10,18 @@ namespace Entities_Scripts
         [SerializeField] private ExplosionData explosionData;
         public ObjectPoolManager explosionPool;
         
+        
+        
         private void Start()
         {
             explosionPool = GameObject.FindGameObjectWithTag("ExplosionPool").GetComponent<ObjectPoolManager>();
         }
 
+
         public void Explode()
         {
             var explosion = GetExplosionObject();
             var explosionScript = explosion.GetComponent<Explosion>();
-            AddPoolTimerComponentToExplosionObject(explosionScript);
 
             DestroyThis(explosionScript);
         }
@@ -40,13 +41,7 @@ namespace Entities_Scripts
             explosion.transform.position = transform.position;
             return explosion;
         }
-        
-        private void AddPoolTimerComponentToExplosionObject(Explosion explosionScript)
-        {
-            var returnToPoolTimer = explosionScript.gameObject.AddComponent<UnityEventTimer>();
-            returnToPoolTimer.timeToEnd = explosionData.lifeTime;
-            returnToPoolTimer.onTimerEnd.AddListener(explosionScript.ReturnToPool);
-            returnToPoolTimer.Start();
-        }
     }
+    
 }
+

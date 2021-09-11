@@ -27,9 +27,11 @@ namespace s1nu5
 
 		private void OnEnable()
 		{
-			onTimerEnd = new UnityEvent();
 			if (timer != null) timer.OnTimerEnd += InvokeEvent;
-			if (isStartingOnEnable) Start();
+			if (isStartingOnEnable)
+			{
+				Start();
+			}
 		}
 
 		private void OnDisable()

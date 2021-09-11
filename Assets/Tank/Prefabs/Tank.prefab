@@ -428,6 +428,8 @@ GameObject:
   - component: {fileID: 9194128925352552338}
   - component: {fileID: -7847769631964591288}
   - component: {fileID: 9194128925352552349}
+  - component: {fileID: 1521210263}
+  - component: {fileID: 1521210262}
   m_Layer: 0
   m_Name: Tank
   m_TagString: Player
@@ -649,10 +651,9 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   reloadingTime: 1
   explosionData:
-    radius: 3
+    radius: 1
     force: 10000
     damage: 100
-    lifeTime: 2
 --- !u!114 &9194128925352552347
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -667,7 +668,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   muzzle: {fileID: 9194128925547506682}
   tower: {fileID: 6788928994223911664}
-  shellStartVelocity: 18
+  shellStartVelocity: 25
   gunCounterForce: 50000
 --- !u!114 &9194128925352552338
 MonoBehaviour:
@@ -706,6 +707,45 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualEffect: {fileID: 9194128925547506660}
+--- !u!114 &1521210263
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194128925352552339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 66b6f1ac7a32dc14aa11d76f22153de8, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  onTakeDamage:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 1521210262}
+        m_TargetAssemblyTypeName: Tank.Scripts.Logic.TankLogic, TankLogic
+        m_MethodName: HandleDamage
+        m_Mode: 0
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
+--- !u!114 &1521210262
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 9194128925352552339}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 149fc0252fbaf30428e28a751d5e8265, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &9194128925547506683
 GameObject:
   m_ObjectHideFlags: 0

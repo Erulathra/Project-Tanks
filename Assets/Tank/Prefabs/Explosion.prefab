@@ -13,6 +13,7 @@ GameObject:
   - component: {fileID: 6708089679428826759}
   - component: {fileID: 6708089679428826754}
   - component: {fileID: 6708089679428826755}
+  - component: {fileID: 4307387649612920781}
   m_Layer: 0
   m_Name: Explosion
   m_TagString: Explosion
@@ -126,9 +127,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: f71fc0223b3f4ac687e039c6d0c52de5, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  radius: 4
-  force: 5000
-  damage: 100
 --- !u!114 &6708089679428826755
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -142,3 +140,32 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   visualEffect: {fileID: 6708089679428826756}
+--- !u!114 &4307387649612920781
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 6708089679428826758}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 87680f903f614fa59faf1b4710dffd62, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  isStartingOnEnable: 1
+  timeToEnd: 2
+  onTimerEnd:
+    m_PersistentCalls:
+      m_Calls:
+      - m_Target: {fileID: 6708089679428826754}
+        m_TargetAssemblyTypeName: Entities_Scripts.ExplosionScripts.Explosion, Entities
+        m_MethodName: ReturnToPool
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2

@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using Cinemachine;
 using PlayerManagement.PlayerGameObjectBuilder;
 using PlayerManagement.SpawnPointHandler;
 using UnityEngine;
@@ -9,11 +10,12 @@ namespace PlayerManagement
 	public class PlayerManager : MonoBehaviour
 	{
 		[SerializeField] private GameObject playerPrefab;
+		[SerializeField] private CinemachineTargetGroup targetGroup;
 
 		private PlayerInfo playerInfo;
-		private List<GameObject> playersGameObjects;
-
 		private ISpawnPointHandler spawnPointHandler;
+		
+		private List<GameObject> playersGameObjects;
 
 		//TODO Dodawanie do kamery
 		private void Start()
@@ -22,7 +24,6 @@ namespace PlayerManagement
 			if (playerSettings == null) Destroy(gameObject);
 
 			playerInfo = playerSettings.GetComponent<PlayerInfo>();
-
 			spawnPointHandler = GetComponent<ISpawnPointHandler>();
 
 			SpawnPlayersAndAssingDevices();
@@ -50,6 +51,7 @@ namespace PlayerManagement
 			playerGameObjectBuilder.AddAimHandler();
 			playerGameObjectBuilder.AssingController();
 			playerGameObjectBuilder.MoveToSpawnPoint(spawnPointHandler.GetSpawnPoint());
+			playerGameObjectBuilder.AddToTargetGroup(targetGroup);
 		}
 
 		private IPlayerGameObjectBuilder CreatePlayerGameObjectBuilder(Player player)
@@ -68,7 +70,5 @@ namespace PlayerManagement
 	}
 
 	internal class NoneControllerException : Exception
-	{
-	
-	}
+	{ }
 }

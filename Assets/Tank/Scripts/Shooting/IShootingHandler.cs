@@ -1,4 +1,4 @@
-using Tank.Scripts.Shooting.ExplosionScripts;
+using Entities_Scripts.ExplosionScripts;
 
 namespace Tank.Scripts.Shooting
 {
