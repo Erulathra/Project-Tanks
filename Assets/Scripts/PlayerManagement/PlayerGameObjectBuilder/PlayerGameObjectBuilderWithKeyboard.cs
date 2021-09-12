@@ -16,15 +16,15 @@ namespace PlayerManagement.PlayerGameObjectBuilder
 
 		public override void AssingController()
 		{
-			var playerInput = PlayerGameObject.GetComponent<PlayerInput>();
-			var inputDevices = GetMouseAndKeyboard(Player);
+			var playerInput = PlayerGameObject.GetComponent<UnityEngine.InputSystem.PlayerInput>();
+			var inputDevices = GetMouseAndKeyboard(PlayerInput);
 			playerInput.SwitchCurrentControlScheme(inputDevices);
 		}
 
-		private static InputDevice[] GetMouseAndKeyboard(Player player)
+		private static InputDevice[] GetMouseAndKeyboard(PlayerInput playerInput)
 		{
 			var inputDevices = new InputDevice[2];
-			inputDevices[0] = player.InputDevice;
+			inputDevices[0] = playerInput.InputDevice;
 			inputDevices[1] = Mouse.current;
 			return inputDevices;
 		}

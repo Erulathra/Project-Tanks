@@ -9,8 +9,8 @@ namespace PlayerManagement.PlayerGameObjectBuilder
 	
 		public override void AssingController()
 		{
-			var playerInput = PlayerGameObject.GetComponent<PlayerInput>();
-			playerInput.SwitchCurrentControlScheme(Player.InputDevice);
+			var playerInput = PlayerGameObject.GetComponent<UnityEngine.InputSystem.PlayerInput>();
+			playerInput.SwitchCurrentControlScheme(PlayerInput.InputDevice);
 		}
 	}
 }

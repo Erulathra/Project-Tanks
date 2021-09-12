@@ -1,11 +1,12 @@
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace PlayerManagement
 {
 	public class PlayerLobby : MonoBehaviour
 	{
-		[SerializeField] private PlayerInfo playerInfo;
+		[FormerlySerializedAs("playerInfo")] [SerializeField] private PlayerInputDeviceInfo playerInputDeviceInfo;
 		
 		private void Update()
 		{
@@ -25,7 +26,7 @@ namespace PlayerManagement
 
 			if (keyboard.enterKey.wasReleasedThisFrame)
 			{
-				playerInfo.AddPlayerWhenItWasNotAdded(keyboard, PlayerControllerType.MouseAndKeyboard);
+				playerInputDeviceInfo.AddPlayerWhenItWasNotAdded(keyboard, PlayerControllerType.MouseAndKeyboard);
 			}
 		}
 
@@ -36,7 +37,7 @@ namespace PlayerManagement
 			
 			if (gamepad.startButton.wasReleasedThisFrame)
 			{
-				playerInfo.AddPlayerWhenItWasNotAdded(gamepad, PlayerControllerType.Gamepad);
+				playerInputDeviceInfo.AddPlayerWhenItWasNotAdded(gamepad, PlayerControllerType.Gamepad);
 			}
 		}
 	}

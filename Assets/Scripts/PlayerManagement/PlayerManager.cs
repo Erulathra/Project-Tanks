@@ -12,7 +12,7 @@ namespace PlayerManagement
 		[SerializeField] private GameObject playerPrefab;
 		[SerializeField] private CinemachineTargetGroup targetGroup;
 
-		private PlayerInfo playerInfo;
+		private PlayerInputDeviceInfo playerInputDeviceInfo;
 		private ISpawnPointHandler spawnPointHandler;
 		
 		private List<GameObject> playersGameObjects;
@@ -20,10 +20,10 @@ namespace PlayerManagement
 		//TODO Dodawanie do kamery
 		private void Start()
 		{
-			var playerSettings = GameObject.Find("PlayerSettings").GetComponent<PlayerInfo>();
+			var playerSettings = GameObject.Find("PlayerSettings").GetComponent<PlayerInputDeviceInfo>();
 			if (playerSettings == null) Destroy(gameObject);
 
-			playerInfo = playerSettings.GetComponent<PlayerInfo>();
+			playerInputDeviceInfo = playerSettings.GetComponent<PlayerInputDeviceInfo>();
 			spawnPointHandler = GetComponent<ISpawnPointHandler>();
 
 			SpawnPlayersAndAssingDevices();
@@ -31,37 +31,37 @@ namespace PlayerManagement
 
 		private void SpawnPlayersAndAssingDevices()
 		{
-			foreach (var player in playerInfo.Players) TryInstantiatePlayerGameObject(player);
+			foreach (var player in playerInputDeviceInfo.Players) TryInstantiatePlayerGameObject(player);
 		}
 
-		private void TryInstantiatePlayerGameObject(Player player)
+		private void TryInstantiatePlayerGameObject(PlayerInput playerInput)
 		{
 			try
 			{
-				InstantiatePlayerGameObject(player);
+				InstantiatePlayerGameObject(playerInput);
 			}
 			catch (NoneControllerException)
 			{ }
 		}
 
-		private void InstantiatePlayerGameObject(Player player)
+		private void InstantiatePlayerGameObject(PlayerInput playerInput)
 		{
-			IPlayerGameObjectBuilder playerGameObjectBuilder = CreatePlayerGameObjectBuilder(player);
-			playerGameObjectBuilder.Reset(playerPrefab, player);
+			IPlayerGameObjectBuilder playerGameObjectBuilder = CreatePlayerGameObjectBuilder(playerInput);
+			playerGameObjectBuilder.Reset(playerPrefab, playerInput);
 			playerGameObjectBuilder.AddAimHandler();
 			playerGameObjectBuilder.AssingController();
 			playerGameObjectBuilder.MoveToSpawnPoint(spawnPointHandler.GetSpawnPoint());
 			playerGameObjectBuilder.AddToTargetGroup(targetGroup);
 		}
 
-		private IPlayerGameObjectBuilder CreatePlayerGameObjectBuilder(Player player)
+		private IPlayerGameObjectBuilder CreatePlayerGameObjectBuilder(PlayerInput playerInput)
 		{
 			IPlayerGameObjectBuilder playerGameObjectBuilder;
-			if (player.playerControllerType == PlayerControllerType.Gamepad)
+			if (playerInput.playerControllerType == PlayerControllerType.Gamepad)
 				playerGameObjectBuilder = gameObject.AddComponent<PlayerGameObjectBuilderWithGamepad>();
-			else if (player.playerControllerType == PlayerControllerType.MouseAndKeyboard)
+			else if (playerInput.playerControllerType == PlayerControllerType.MouseAndKeyboard)
 				playerGameObjectBuilder = gameObject.AddComponent<PlayerGameObjectBuilderWithKeyboard>();
-			else if (player.playerControllerType == PlayerControllerType.None)
+			else if (playerInput.playerControllerType == PlayerControllerType.None)
 				throw new NoneControllerException();
 			else
 				throw new NotImplementedException();

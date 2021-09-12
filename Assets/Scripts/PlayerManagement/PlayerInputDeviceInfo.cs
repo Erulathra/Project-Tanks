@@ -13,7 +13,7 @@ namespace PlayerManagement
 	}
 
 	[Serializable]
-	public struct Player
+	public struct PlayerInput
 	{
 		public PlayerControllerType playerControllerType;
 		public InputDevice InputDevice;
@@ -24,14 +24,14 @@ namespace PlayerManagement
 		
 	}
 	
-	public class PlayerInfo : MonoBehaviour
+	public class PlayerInputDeviceInfo : MonoBehaviour
 	{
-		public Player[] Players { get; private set; }
+		public PlayerInput[] Players { get; private set; }
 
 		private void Start()
 		{
 			DontDestroyOnLoad(gameObject);
-			Players = new Player[4];
+			Players = new PlayerInput[4];
 		}
 
 		public void AddPlayerWhenItWasNotAdded(InputDevice device, PlayerControllerType type)

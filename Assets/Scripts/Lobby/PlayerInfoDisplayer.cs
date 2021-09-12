@@ -1,11 +1,12 @@
 using UnityEngine;
 using PlayerManagement;
 using TMPro;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 public class PlayerInfoDisplayer : MonoBehaviour
 {
-    [SerializeField] private PlayerInfo playerInfo;
+    [FormerlySerializedAs("playerInfo")] [SerializeField] private PlayerInputDeviceInfo playerInputDeviceInfo;
     [SerializeField] private TextMeshProUGUI[] playerInfoTextMeshes;
 
     private const string NoneIcon = "諸";
@@ -16,7 +17,7 @@ public class PlayerInfoDisplayer : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            playerInfoTextMeshes[i].text = "Player " + (i + 1).ToString() + "\n" + PlayerControllerTypeToString(playerInfo.Players[i].playerControllerType);
+            playerInfoTextMeshes[i].text = "Player " + (i + 1).ToString() + "\n" + PlayerControllerTypeToString(playerInputDeviceInfo.Players[i].playerControllerType);
         }
     }
     private string PlayerControllerTypeToString(PlayerControllerType p)

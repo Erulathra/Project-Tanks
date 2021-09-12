@@ -5,13 +5,13 @@ using UnityEngine;
 
 public abstract class PlayerGameObjectBuilder : MonoBehaviour, IPlayerGameObjectBuilder
 {
-	protected Player Player;
+	protected PlayerInput PlayerInput;
 	protected GameObject PlayerGameObject;
 	
-	public void Reset(GameObject playerPrefab, Player player)
+	public void Reset(GameObject playerPrefab, PlayerInput playerInput)
 	{
 		PlayerGameObject = Instantiate(playerPrefab);
-		this.Player = player;
+		this.PlayerInput = playerInput;
 	}
 
 	public abstract void AddAimHandler();
