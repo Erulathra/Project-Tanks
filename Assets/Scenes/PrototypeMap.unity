@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 384.57385, g: 296.57178, b: 315.2484, a: 1}
+  m_IndirectSpecularColor: {r: 384.5736, g: 296.57178, b: 315.2484, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -12639,7 +12639,6 @@ MonoBehaviour:
     radius: 5
     force: 50000
     damage: 100
-    lifeTime: 2
   explosionPool: {fileID: 163180340}
 --- !u!1 &717496233
 GameObject:
@@ -27921,7 +27920,7 @@ Camera:
     height: 1
   near clip plane: 0.3
   far clip plane: 1000
-  field of view: 90
+  field of view: 60
   orthographic: 0
   orthographic size: 5
   m_Depth: -1
@@ -34449,7 +34448,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.6728307, y: 1}
+    m_SensorSize: {x: 2.0452173, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16

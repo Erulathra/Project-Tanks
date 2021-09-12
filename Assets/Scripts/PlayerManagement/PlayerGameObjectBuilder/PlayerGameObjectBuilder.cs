@@ -21,6 +21,11 @@ public abstract class PlayerGameObjectBuilder : MonoBehaviour, IPlayerGameObject
 		return PlayerGameObject;
 	}
 
+	public void ChangeColor(Color color)
+	{
+		throw new System.NotImplementedException();
+	}
+
 	public void MoveToSpawnPoint(Vector3 spawnPointPosition)
 	{
 		PlayerGameObject.transform.position = spawnPointPosition;
@@ -30,4 +35,5 @@ public abstract class PlayerGameObjectBuilder : MonoBehaviour, IPlayerGameObject
 	{
 		targetGroup.AddMember(PlayerGameObject.transform, 1f, 1f);
 	}
+
 }

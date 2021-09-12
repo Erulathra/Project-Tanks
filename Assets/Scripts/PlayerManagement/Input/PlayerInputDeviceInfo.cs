@@ -1,6 +1,7 @@
 using System;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.Serialization;
 
 namespace PlayerManagement
 {
@@ -15,6 +16,7 @@ namespace PlayerManagement
 	[Serializable]
 	public struct PlayerInput
 	{
+		[FormerlySerializedAs("playerIndex")] public int index;
 		public PlayerControllerType playerControllerType;
 		public InputDevice InputDevice;
 	}
@@ -26,12 +28,12 @@ namespace PlayerManagement
 	
 	public class PlayerInputDeviceInfo : MonoBehaviour
 	{
-		public PlayerInput[] Players { get; private set; }
+		public PlayerInput[] PlayersInput { get; private set; }
 
 		private void Start()
 		{
 			DontDestroyOnLoad(gameObject);
-			Players = new PlayerInput[4];
+			PlayersInput = new PlayerInput[4];
 		}
 
 		public void AddPlayerWhenItWasNotAdded(InputDevice device, PlayerControllerType type)
@@ -55,15 +57,16 @@ namespace PlayerManagement
 		private void TryAddPlayer(InputDevice device, PlayerControllerType type)
 		{
 			var place = FindFreePlaceForPlayer();
-			Players[place].InputDevice = device;
-			Players[place].playerControllerType = type;
+			PlayersInput[place].InputDevice = device;
+			PlayersInput[place].playerControllerType = type;
+			PlayersInput[place].index = place;
 		}
 
 		private int FindFreePlaceForPlayer()
 		{
 			for (var i = 0; i < 4; i++)
 			{
-				if (Players[i].playerControllerType == PlayerControllerType.None)
+				if (PlayersInput[i].playerControllerType == PlayerControllerType.None)
 				{
 					return i;
 				}
@@ -74,7 +77,7 @@ namespace PlayerManagement
 
 		private bool WasDeviceAdded(InputDevice device)
 		{
-			foreach (var player in Players)
+			foreach (var player in PlayersInput)
 				if (player.InputDevice == device)
 					return true;
 

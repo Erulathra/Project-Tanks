@@ -2,6 +2,7 @@ using System;
 using System.Collections.Generic;
 using Cinemachine;
 using PlayerManagement.PlayerGameObjectBuilder;
+using PlayerManagement.PlayerInfoManagement;
 using PlayerManagement.SpawnPointHandler;
 using UnityEngine;
 
@@ -16,22 +17,26 @@ namespace PlayerManagement
 		private ISpawnPointHandler spawnPointHandler;
 		
 		private List<GameObject> playersGameObjects;
+		private GameObject playerSettings;
+		private PlayerInfoManager playerInfoManager;
+		
 
-		//TODO Dodawanie do kamery
 		private void Start()
 		{
-			var playerSettings = GameObject.Find("PlayerSettings").GetComponent<PlayerInputDeviceInfo>();
+			playerSettings = GameObject.Find("PlayerSettings");
 			if (playerSettings == null) Destroy(gameObject);
 
 			playerInputDeviceInfo = playerSettings.GetComponent<PlayerInputDeviceInfo>();
 			spawnPointHandler = GetComponent<ISpawnPointHandler>();
 
+			playerInfoManager = playerSettings.GetComponent<PlayerInfoManager>();
+			
 			SpawnPlayersAndAssingDevices();
 		}
 
 		private void SpawnPlayersAndAssingDevices()
 		{
-			foreach (var player in playerInputDeviceInfo.Players) TryInstantiatePlayerGameObject(player);
+			foreach (var player in playerInputDeviceInfo.PlayersInput) TryInstantiatePlayerGameObject(player);
 		}
 
 		private void TryInstantiatePlayerGameObject(PlayerInput playerInput)
@@ -52,6 +57,9 @@ namespace PlayerManagement
 			playerGameObjectBuilder.AssingController();
 			playerGameObjectBuilder.MoveToSpawnPoint(spawnPointHandler.GetSpawnPoint());
 			playerGameObjectBuilder.AddToTargetGroup(targetGroup);
+			
+			var playerGameObject = playerGameObjectBuilder.GetResult();
+			playerInfoManager.AssociateGameObjectWithPlayerInfo(playerGameObject, playerInput.index);
 		}
 
 		private IPlayerGameObjectBuilder CreatePlayerGameObjectBuilder(PlayerInput playerInput)

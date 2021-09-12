@@ -17,7 +17,7 @@ public class PlayerInfoDisplayer : MonoBehaviour
     {
         for (int i = 0; i < 4; i++)
         {
-            playerInfoTextMeshes[i].text = "Player " + (i + 1).ToString() + "\n" + PlayerControllerTypeToString(playerInputDeviceInfo.Players[i].playerControllerType);
+            playerInfoTextMeshes[i].text = "Player " + (i + 1).ToString() + "\n" + PlayerControllerTypeToString(playerInputDeviceInfo.PlayersInput[i].playerControllerType);
         }
     }
     private string PlayerControllerTypeToString(PlayerControllerType p)
