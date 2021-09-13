@@ -1,10 +1,11 @@
 using Tank.Scripts;
 using Tank.Scripts.Input;
 using UnityEngine.InputSystem;
+using PlayerInput = PlayerManagement.PlayerInput;
 
-namespace PlayerManagement.PlayerGameObjectBuilder
+namespace GameSettingsManagement.PlayerGameObjectBuilder
 {
-	public class PlayerGameObjectBuilderWithKeyboard : global::PlayerGameObjectBuilder
+	public class PlayerGameObjectBuilderWithKeyboard : global::GameSettingsManagement.PlayerGameObjectBuilder.PlayerGameObjectBuilder
 	{
 		public override void AddAimHandler()
 		{

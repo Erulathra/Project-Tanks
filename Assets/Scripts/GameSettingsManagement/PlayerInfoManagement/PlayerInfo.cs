@@ -1,8 +1,7 @@
 using System;
 using UnityEngine;
-using UnityEngine.Serialization;
 
-namespace PlayerManagement.PlayerInfoManagement
+namespace GameSettingsManagement.PlayerInfoManagement
 {
 	[Serializable]
 	public class PlayerInfo

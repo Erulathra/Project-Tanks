@@ -1,8 +1,8 @@
-using System;
 using System.Collections.Generic;
+using PlayerManagement;
 using UnityEngine;
 
-namespace PlayerManagement.PlayerInfoManagement
+namespace GameSettingsManagement.PlayerInfoManagement
 {
     public class PlayerInfoManager : MonoBehaviour
     {
@@ -44,7 +44,19 @@ namespace PlayerManagement.PlayerInfoManagement
 
         public void ApplySettings()
         {
-            
+            foreach (var player in players)
+            {
+                ApplyColor(player);
+            }
+        }
+
+        private void ApplyColor(PlayerInfo playerInfo)
+        {
+            var renderers = GetComponentsInChildren<MeshRenderer>();
+            foreach (var renderer in renderers)
+            {
+                renderer.material.color = playerInfo.Color;
+            }
         }
     }
 }

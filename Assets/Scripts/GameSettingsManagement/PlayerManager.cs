@@ -1,12 +1,13 @@
 using System;
 using System.Collections.Generic;
 using Cinemachine;
-using PlayerManagement.PlayerGameObjectBuilder;
-using PlayerManagement.PlayerInfoManagement;
+using GameSettingsManagement.PlayerGameObjectBuilder;
+using GameSettingsManagement.PlayerInfoManagement;
+using PlayerManagement;
 using PlayerManagement.SpawnPointHandler;
 using UnityEngine;
 
-namespace PlayerManagement
+namespace GameSettingsManagement
 {
 	public class PlayerManager : MonoBehaviour
 	{
@@ -60,6 +61,7 @@ namespace PlayerManagement
 			
 			var playerGameObject = playerGameObjectBuilder.GetResult();
 			playerInfoManager.AssociateGameObjectWithPlayerInfo(playerGameObject, playerInput.index);
+			playerInfoManager.ApplySettings();
 		}
 
 		private IPlayerGameObjectBuilder CreatePlayerGameObjectBuilder(PlayerInput playerInput)

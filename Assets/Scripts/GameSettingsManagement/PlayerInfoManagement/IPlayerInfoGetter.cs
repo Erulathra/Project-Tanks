@@ -1,4 +1,4 @@
-namespace PlayerManagement.PlayerInfoManagement
+namespace GameSettingsManagement.PlayerInfoManagement
 {
 	public interface IPlayerInfoGetter
 	{

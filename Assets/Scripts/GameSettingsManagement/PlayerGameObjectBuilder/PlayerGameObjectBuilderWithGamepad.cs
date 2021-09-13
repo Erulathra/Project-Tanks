@@ -1,8 +1,6 @@
-using UnityEngine.InputSystem;
-
-namespace PlayerManagement.PlayerGameObjectBuilder
+namespace GameSettingsManagement.PlayerGameObjectBuilder
 {
-	public class PlayerGameObjectBuilderWithGamepad : global::PlayerGameObjectBuilder
+	public class PlayerGameObjectBuilderWithGamepad : global::GameSettingsManagement.PlayerGameObjectBuilder.PlayerGameObjectBuilder
 	{
 		public override void AddAimHandler()
 		{ }

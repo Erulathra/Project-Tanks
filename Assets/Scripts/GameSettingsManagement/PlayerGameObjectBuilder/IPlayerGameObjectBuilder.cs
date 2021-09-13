@@ -1,7 +1,8 @@
 using Cinemachine;
+using PlayerManagement;
 using UnityEngine;
 
-namespace PlayerManagement.PlayerGameObjectBuilder
+namespace GameSettingsManagement.PlayerGameObjectBuilder
 {
 	public interface IPlayerGameObjectBuilder
 	{
