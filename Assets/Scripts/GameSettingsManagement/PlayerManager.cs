@@ -24,8 +24,13 @@ namespace GameSettingsManagement
 
 		private void Start()
 		{
-			playerSettings = GameObject.Find("PlayerSettings");
-			if (playerSettings == null) Destroy(gameObject);
+			playerSettings = GameObject.Find("GameSettings");
+			if (playerSettings == null)
+			{
+				Debug.LogError("No settings game object");
+				Destroy(gameObject);
+				return;
+			}
 
 			playerInputDeviceInfo = playerSettings.GetComponent<PlayerInputDeviceInfo>();
 			spawnPointHandler = GetComponent<ISpawnPointHandler>();
@@ -33,6 +38,7 @@ namespace GameSettingsManagement
 			playerInfoManager = playerSettings.GetComponent<PlayerInfoManager>();
 			
 			SpawnPlayersAndAssingDevices();
+			playerInfoManager.ApplySettings();
 		}
 
 		private void SpawnPlayersAndAssingDevices()
@@ -61,7 +67,6 @@ namespace GameSettingsManagement
 			
 			var playerGameObject = playerGameObjectBuilder.GetResult();
 			playerInfoManager.AssociateGameObjectWithPlayerInfo(playerGameObject, playerInput.index);
-			playerInfoManager.ApplySettings();
 		}
 
 		private IPlayerGameObjectBuilder CreatePlayerGameObjectBuilder(PlayerInput playerInput)

@@ -12,7 +12,7 @@ namespace GameSettingsManagement.PlayerGameObjectBuilder
 		public void Reset(GameObject playerPrefab, PlayerInput playerInput)
 		{
 			PlayerGameObject = Instantiate(playerPrefab);
-			this.PlayerInput = playerInput;
+			PlayerInput = playerInput;
 		}
 
 		public abstract void AddAimHandler();

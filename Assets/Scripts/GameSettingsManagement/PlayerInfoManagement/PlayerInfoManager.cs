@@ -52,7 +52,8 @@ namespace GameSettingsManagement.PlayerInfoManagement
 
         private void ApplyColor(PlayerInfo playerInfo)
         {
-            var renderers = GetComponentsInChildren<MeshRenderer>();
+            var playerGameObject = playerInfo.associatedGameObject;
+            var renderers = playerGameObject.GetComponentsInChildren<MeshRenderer>();
             foreach (var renderer in renderers)
             {
                 renderer.material.color = playerInfo.Color;
