@@ -38,7 +38,6 @@ namespace GameSettingsManagement
 			playerInfoManager = playerSettings.GetComponent<PlayerInfoManager>();
 			
 			SpawnPlayersAndAssingDevices();
-			playerInfoManager.ApplySettings();
 		}
 
 		private void SpawnPlayersAndAssingDevices()
@@ -64,9 +63,24 @@ namespace GameSettingsManagement
 			playerGameObjectBuilder.AssingController();
 			playerGameObjectBuilder.MoveToSpawnPoint(spawnPointHandler.GetSpawnPoint());
 			playerGameObjectBuilder.AddToTargetGroup(targetGroup);
-			
 			var playerGameObject = playerGameObjectBuilder.GetResult();
-			playerInfoManager.AssociateGameObjectWithPlayerInfo(playerGameObject, playerInput.index);
+			
+			PreparePlayerToGame(playerInput, playerGameObject);
+			AddPlayerObjectsToRoundLogic(playerGameObject);
+		}
+
+		private void PreparePlayerToGame(PlayerInput playerInput, GameObject playerGameObject)
+		{
+			var playerStats = playerGameObject.GetComponent<Player>();
+			playerStats.playerInfo = playerInfoManager.GetPlayerInfo(playerInput.index);
+			playerStats.ApplyColor();
+			
+		}
+
+		private void AddPlayerObjectsToRoundLogic(GameObject playerGameObject)
+		{
+			var roundLogic = GetComponent<RoundLogic>();
+			roundLogic.AddPlayer(playerGameObject);
 		}
 
 		private IPlayerGameObjectBuilder CreatePlayerGameObjectBuilder(PlayerInput playerInput)

@@ -6,13 +6,19 @@ using UnityEngine.Events;
 
 namespace Tank.Scripts.Logic
 {
+
 	public class TankLogic : MonoBehaviour
 	{
-		private int healthPoints = 100;
+		public UnityEvent OnDie;
+
+		public int startHealthPoints = 100;
+		public int startHearts = 3;
+		
+		public int Hearts { get; private set; }
+		private int healthPoints;
+
 		private ObjectPoolManager explosionPool;
 		private ISpawnPointHandler spawnPointHandler;
-
-		private UnityEvent OnDie;
 		private ExplosionSpawner explosionSpawner;
 		
 		private void Start()
@@ -30,8 +36,20 @@ namespace Tank.Scripts.Logic
 			explosionSpawner = new ExplosionSpawner();
 			explosionSpawner.SetPool(explosionPool);
 			explosionSpawner.SetData(explosionData);
+
+			ResetHearts();
+			ResetHealth();
 		}
 
+		public void ResetHearts()
+		{
+			Hearts = startHearts;
+		}
+
+		public void ResetHealth()
+		{
+			healthPoints = startHealthPoints;
+		}
 
 		public void HandleDamage(int damage)
 		{
@@ -40,20 +58,14 @@ namespace Tank.Scripts.Logic
 			DieIfHealthPointsAreNegative();
 		}
 
-		public void DieIfHealthPointsAreNegative()
+		private void DieIfHealthPointsAreNegative()
 		{
 			if (healthPoints > 0) return;
 			Explode();
 			OnDie?.Invoke();
-			Respawn();
+			LoseOrRespawn();
 		}
-
-		private void Respawn()
-		{
-			transform.position = spawnPointHandler.GetSpawnPoint();
-			healthPoints = 100;
-		}
-
+		
 		private void Explode()
 		{
 			explosionSpawner.SetPosition(transform.position);
@@ -61,6 +73,22 @@ namespace Tank.Scripts.Logic
 			explosionSpawner.Explode();
 		}
 
+		private void LoseOrRespawn()
+		{
+			if (Hearts <= 0) LoseRound();
+			else Respawn();
+		}
 		
+		private void LoseRound()
+		{
+			gameObject.SetActive(false);
+		}
+
+		private void Respawn()
+		{
+			transform.position = spawnPointHandler.GetSpawnPoint();
+			ResetHealth();
+			Hearts--;
+		}
 	}
 }

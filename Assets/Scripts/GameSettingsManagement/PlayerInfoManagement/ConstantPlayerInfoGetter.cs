@@ -8,13 +8,13 @@ namespace GameSettingsManagement.PlayerInfoManagement
 		public PlayerInfo GetPlayerInfo(int playerIndex)
 		{
 			if (playerIndex == 0)
-				return new PlayerInfo("Player 1", Color.green);
+				return new PlayerInfo("Green", Color.green);
 			if (playerIndex == 1)
-				return new PlayerInfo("Player 2", Color.red);
+				return new PlayerInfo("Red", Color.red);
 			if (playerIndex == 2)
-				return new PlayerInfo("Player 3", Color.blue);
+				return new PlayerInfo("Blue", Color.blue);
 			if (playerIndex == 3)
-				return new PlayerInfo("Player 4", Color.yellow);
+				return new PlayerInfo("Yellow", Color.yellow);
 			else
 				throw new NotImplementedException();
 		}

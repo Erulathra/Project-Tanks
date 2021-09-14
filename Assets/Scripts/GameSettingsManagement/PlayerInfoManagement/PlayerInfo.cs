@@ -8,22 +8,21 @@ namespace GameSettingsManagement.PlayerInfoManagement
 	{
 		public string Name { get; private set; }
 		public Color Color { get; private set; }
-		
-		public GameObject associatedGameObject;
-		public int hearts;
 
+		public int score;
+
+		
+		
 		public PlayerInfo(string name, Color color)
 		{
-			this.Name = name;
-			this.Color = color;
+			Name = name;
+			Color = color;
 		}
 
 		public PlayerInfo(PlayerInfo playerInfo)
 		{
 			Name = playerInfo.Name;
 			Color = playerInfo.Color;
-			associatedGameObject = playerInfo.associatedGameObject;
-			hearts = playerInfo.hearts;
 		}
 	}
 	
