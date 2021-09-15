@@ -11,8 +11,6 @@ namespace GameSettingsManagement.PlayerInfoManagement
 
 		public int score;
 
-		
-		
 		public PlayerInfo(string name, Color color)
 		{
 			Name = name;

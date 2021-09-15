@@ -12,9 +12,9 @@ namespace GameSettingsManagement.PlayerInfoManagement
 			if (playerIndex == 1)
 				return new PlayerInfo("Red", Color.red);
 			if (playerIndex == 2)
-				return new PlayerInfo("Blue", Color.blue);
-			if (playerIndex == 3)
 				return new PlayerInfo("Yellow", Color.yellow);
+			if (playerIndex == 3)
+				return new PlayerInfo("Blue", Color.blue);
 			else
 				throw new NotImplementedException();
 		}

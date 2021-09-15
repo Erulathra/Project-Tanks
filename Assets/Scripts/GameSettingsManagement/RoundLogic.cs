@@ -1,47 +1,78 @@
+using System;
+using System.Collections;
 using System.Collections.Generic;
 using GameSettingsManagement.PlayerInfoManagement;
-using TMPro;
 using UnityEngine;
 
 namespace GameSettingsManagement
 {
-	//todo Wiadomości jako obserwator
 	public class RoundLogic : MonoBehaviour
 	{
-		[SerializeField] private TextMeshProUGUI messageBoard;
+		[SerializeField] private float scoreBoardTime = 2f;
+		private IEnumerator endRoundCoroutineHandle;
+
 		private List<GameObject> players;
+
 
 		public void Awake()
 		{
 			players = new List<GameObject>();
-			messageBoard.gameObject.SetActive(false);
 		}
+
+		public void Start()
+		{
+			StartCoroutine(EndRoundCoroutine());
+		}
+
+		public event Action<string, string> OnRoundEndEvent;
 
 		public void AddPlayer(GameObject player)
 		{
 			players.Add(player);
 		}
 
-		private void Update()
+		private IEnumerator EndRoundCoroutine()
 		{
-			List<GameObject> livingPlayers = GetListOfLivingPlayers();
-			if (livingPlayers.Count == 1)
+			while (true)
 			{
-				var winnerPlayerInfo = livingPlayers[0].GetComponent<Player>().playerInfo;
-				messageBoard.gameObject.SetActive(true);
-				messageBoard.color = winnerPlayerInfo.Color;
-				messageBoard.text = "And the Winner is " + winnerPlayerInfo.Name;
+				var livingPlayers = GetListOfLivingPlayers();
+				if (livingPlayers.Count == 1)
+				{
+					if (endRoundCoroutineHandle != null) break;
+
+					var winnerPlayerInfo = livingPlayers[0].GetComponent<Player>().playerInfo;
+					winnerPlayerInfo.score += 1;
+					ShowMessage(winnerPlayerInfo);
+					yield return new WaitForSeconds(scoreBoardTime);
+					Debug.Log("Tu bedzie ładowanie nowego poziomu");
+					Debug.Break();
+					yield break;
+				}
+				yield return null;
 			}
+		}
+
+		private void ShowMessage(PlayerInfo winnerPlayerInfo)
+		{
+			var header = "Winner is <color=#" + ColorUtility.ToHtmlStringRGB(winnerPlayerInfo.Color) + ">" + winnerPlayerInfo.Name + "</color>";
+			var message = " ";
+			foreach (var player in players)
+			{
+				var playerInfo = player.GetComponent<Player>().playerInfo;
+				message += "<color=#" + ColorUtility.ToHtmlStringRGB(playerInfo.Color) + ">" + playerInfo.score + "</color> ";
+			}
+
+			OnRoundEndEvent?.Invoke(header, message);
 		}
 
 		private List<GameObject> GetListOfLivingPlayers()
 		{
 			var temp = new List<GameObject>();
 			foreach (var player in players)
-				if(player.activeSelf) temp.Add(player);
-			
+				if (player.activeSelf)
+					temp.Add(player);
+
 			return temp;
 		}
-
 	}
 }
