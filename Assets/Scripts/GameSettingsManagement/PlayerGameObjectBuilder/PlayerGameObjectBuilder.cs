@@ -21,12 +21,7 @@ namespace GameSettingsManagement.PlayerGameObjectBuilder
 		{
 			return PlayerGameObject;
 		}
-
-		public void ChangeColor(Color color)
-		{
-			throw new System.NotImplementedException();
-		}
-
+		
 		public void MoveToSpawnPoint(Vector3 spawnPointPosition)
 		{
 			PlayerGameObject.transform.position = spawnPointPosition;
@@ -34,7 +29,7 @@ namespace GameSettingsManagement.PlayerGameObjectBuilder
 
 		public void AddToTargetGroup(CinemachineTargetGroup targetGroup)
 		{
-			targetGroup.AddMember(PlayerGameObject.transform, 1f, 35f);
+			targetGroup.AddMember(PlayerGameObject.transform, 1f, 10f);
 		}
 
 	}

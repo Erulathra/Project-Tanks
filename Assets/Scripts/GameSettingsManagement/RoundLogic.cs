@@ -8,8 +8,10 @@ namespace GameSettingsManagement
 {
 	public class RoundLogic : MonoBehaviour
 	{
+		public event Action<string, string> OnRoundEndEvent;
+
+		
 		[SerializeField] private float scoreBoardTime = 2f;
-		private IEnumerator endRoundCoroutineHandle;
 
 		private List<GameObject> players;
 
@@ -23,9 +25,7 @@ namespace GameSettingsManagement
 		{
 			StartCoroutine(EndRoundCoroutine());
 		}
-
-		public event Action<string, string> OnRoundEndEvent;
-
+		
 		public void AddPlayer(GameObject player)
 		{
 			players.Add(player);
@@ -38,8 +38,6 @@ namespace GameSettingsManagement
 				var livingPlayers = GetListOfLivingPlayers();
 				if (livingPlayers.Count == 1)
 				{
-					if (endRoundCoroutineHandle != null) break;
-
 					var winnerPlayerInfo = livingPlayers[0].GetComponent<Player>().playerInfo;
 					winnerPlayerInfo.score += 1;
 					ShowMessage(winnerPlayerInfo);

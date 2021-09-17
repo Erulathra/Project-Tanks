@@ -22,7 +22,7 @@ PrefabInstance:
     m_Modifications:
     - target: {fileID: 100014, guid: d7962f90116a5c94d9a7a2b2e4fbc1b2, type: 3}
       propertyPath: m_Name
-      value: PumpJack
+      value: PumpJack Variant
       objectReference: {fileID: 0}
     - target: {fileID: 100014, guid: d7962f90116a5c94d9a7a2b2e4fbc1b2, type: 3}
       propertyPath: m_StaticEditorFlags
@@ -76,6 +76,10 @@ PrefabInstance:
       propertyPath: m_LocalEulerAnglesHint.z
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 9500000, guid: d7962f90116a5c94d9a7a2b2e4fbc1b2, type: 3}
+      propertyPath: m_Controller
+      value: 
+      objectReference: {fileID: 9100000, guid: 49ae1ab054a68e040b470a21778209e5, type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: d7962f90116a5c94d9a7a2b2e4fbc1b2, type: 3}
 --- !u!1 &8431454618914077146 stripped
