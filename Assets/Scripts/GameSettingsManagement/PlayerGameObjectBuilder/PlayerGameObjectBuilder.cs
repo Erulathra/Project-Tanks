@@ -34,7 +34,7 @@ namespace GameSettingsManagement.PlayerGameObjectBuilder
 
 		public void AddToTargetGroup(CinemachineTargetGroup targetGroup)
 		{
-			targetGroup.AddMember(PlayerGameObject.transform, 1f, 1f);
+			targetGroup.AddMember(PlayerGameObject.transform, 1f, 35f);
 		}
 
 	}

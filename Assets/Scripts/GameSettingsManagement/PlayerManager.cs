@@ -27,7 +27,7 @@ namespace GameSettingsManagement
 			playerSettings = GameObject.Find("GameSettings");
 			if (playerSettings == null)
 			{
-				Debug.LogError("No settings game object");
+				Debug.LogError("No settings game object (You need to start a game from Lobby)");
 				Destroy(gameObject);
 				return;
 			}
