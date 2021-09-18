@@ -35,7 +35,7 @@ namespace PlayerManagement
 			DontDestroyOnLoad(gameObject);
 			PlayersInput = new PlayerInput[4];
 		}
-
+		
 		public void AddPlayerWhenItWasNotAdded(InputDevice device, PlayerControllerType type)
 		{
 			if (WasDeviceAdded(device)) return;
