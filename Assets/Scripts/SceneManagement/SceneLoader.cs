@@ -9,6 +9,7 @@ public static class SceneLoader
 		PlayerLobby,
 		LoadingScene,
 		DustOne,
+		DustTwo,
 	}
 
 	private static Action _onLoaderCallbackAction;
