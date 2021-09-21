@@ -18,20 +18,21 @@ namespace GameSettingsManagement
 		private ISpawnPointHandler spawnPointHandler;
 		
 		private List<GameObject> playersGameObjects;
-		private GameObject playerSettings;
+		[HideInInspector] public GameObject playerSettings;
 		private PlayerInfoManager playerInfoManager;
-		
 
-		private void Start()
+		private void Awake()
 		{
 			playerSettings = GameObject.Find("GameSettings");
 			if (playerSettings == null)
 			{
 				Debug.LogError("No settings game object (You need to start a game from Lobby)");
 				Destroy(gameObject);
-				return;
 			}
+		}
 
+		private void Start()
+		{
 			playerInputDeviceInfo = playerSettings.GetComponent<PlayerInputDeviceInfo>();
 			spawnPointHandler = GetComponent<ISpawnPointHandler>();
 
@@ -74,7 +75,6 @@ namespace GameSettingsManagement
 			var playerStats = playerGameObject.GetComponent<Player>();
 			playerStats.playerInfo = playerInfoManager.GetPlayerInfo(playerInput.index);
 			playerStats.ApplyColor();
-			
 		}
 
 		private void AddPlayerObjectsToRoundLogic(GameObject playerGameObject)

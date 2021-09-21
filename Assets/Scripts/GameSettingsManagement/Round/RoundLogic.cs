@@ -14,7 +14,7 @@ namespace GameSettingsManagement
 		[SerializeField] private float scoreBoardTime = 2f;
 
 		private List<GameObject> players;
-
+		private RoundManager roundManager;
 
 		public void Awake()
 		{
@@ -23,6 +23,8 @@ namespace GameSettingsManagement
 
 		public void Start()
 		{
+			var playerManager = GetComponent<PlayerManager>();
+			roundManager = playerManager.playerSettings.GetComponent<RoundManager>();
 			StartCoroutine(EndRoundCoroutine());
 		}
 		
@@ -39,11 +41,10 @@ namespace GameSettingsManagement
 				if (livingPlayers.Count == 1)
 				{
 					var winnerPlayerInfo = livingPlayers[0].GetComponent<Player>().playerInfo;
-					winnerPlayerInfo.score += 1;
+					winnerPlayerInfo.score++;
 					ShowMessage(winnerPlayerInfo);
 					yield return new WaitForSeconds(scoreBoardTime);
-					Debug.Log("Tu bedzie ładowanie nowego poziomu");
-					Debug.Break();
+					roundManager.LoadNextMapOrEndTheGame();
 					yield break;
 				}
 				yield return null;

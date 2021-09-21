@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Linq;
 using PlayerManagement;
 using UnityEngine;
 
@@ -30,9 +31,36 @@ namespace GameSettingsManagement.PlayerInfoManagement
     
         public PlayerInfo GetPlayerInfo(int playerIndex)
         {
-            var temp = new PlayerInfo(players[playerIndex]);
-            return temp;
+            return players[playerIndex];
         }
 
+        public List<PlayerInfo> GetScoreBoard()
+        {
+            List<PlayerInfo> tempPlayerList = new List<PlayerInfo>(players);
+            List<PlayerInfo> scoreBoardPlayerList = new List<PlayerInfo>();
+
+            for (int i = 0; i < 4; i++)
+            {
+                scoreBoardPlayerList.Add(FindPlayerWithHighestScore(tempPlayerList));
+            }
+
+            return scoreBoardPlayerList;
+        }
+
+        public PlayerInfo FindPlayerWithHighestScore()
+        {
+            return FindPlayerWithHighestScore(players);
+        }
+        public PlayerInfo FindPlayerWithHighestScore(List<PlayerInfo> playerList)
+        {
+            var foundPlayer = playerList.First();
+            foreach (var player in playerList)
+            {
+                if (foundPlayer.score < player.score)
+                    foundPlayer = player;
+            }
+
+            return foundPlayer;
+        }
     }
 }

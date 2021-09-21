@@ -75,7 +75,7 @@ namespace Tank.Scripts.Logic
 
 		private void LoseOrRespawn()
 		{
-			if (Hearts <= 0) LoseRound();
+			if (Hearts <= 1) LoseRound();
 			else Respawn();
 		}
 		

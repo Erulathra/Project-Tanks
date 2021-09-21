@@ -6,6 +6,6 @@ public class TempScript : MonoBehaviour
 {
 	public void LoadGame()
 	{
-		SceneLoader.LoadScene(SceneLoader.Scene.DustTwo);
+		SceneLoader.LoadScene(SceneLoader.Scene.DustOne);
 	}
 }

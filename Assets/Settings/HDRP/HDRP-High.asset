@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: HDRP-High
   m_EditorClassIdentifier: 
   m_RenderPipelineResources: {fileID: 11400000, guid: 3ce144cff5783da45aa5d4fdc2da14b7, type: 2}
-  m_RenderPipelineRayTracingResources: {fileID: 11400000, guid: ba6e7f30e5cffc249a8bf7ee5756c196, type: 2}
+  m_RenderPipelineRayTracingResources: {fileID: 0}
   m_DefaultVolumeProfile: {fileID: 11400000, guid: 2bca3bf24dc17664eabd6f466202c5c4, type: 2}
   m_LensAttenuation: 0
   m_DefaultLookDevProfile: {fileID: 11400000, guid: a05225fb57faae345b28a71e253e9561, type: 2}
@@ -61,7 +61,7 @@ MonoBehaviour:
     materialQuality: 0
   m_RenderPipelineSettings:
     supportShadowMask: 1
-    supportSSR: 0
+    supportSSR: 1
     supportSSRTransparent: 0
     supportSSAO: 1
     supportSSGI: 1
@@ -109,7 +109,7 @@ MonoBehaviour:
     supportDitheringCrossFade: 1
     supportTerrainHole: 0
     supportProbeVolume: 0
-    supportRayTracing: 1
+    supportRayTracing: 0
     supportedRayTracingMode: 1
     probeVolumeSettings:
       atlasResolution: 128
