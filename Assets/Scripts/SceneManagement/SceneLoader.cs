@@ -13,6 +13,7 @@ public static class SceneLoader
 		LoadingScene,
 		DustOne,
 		DustTwo,
+		StageScene,
 	}
 
 	private class LoadingMonoBehaviour : MonoBehaviour
@@ -21,6 +22,11 @@ public static class SceneLoader
 	private static Action _onLoaderCallbackAction;
 	private static LoadingMonoBehaviour loadingMonoBehaviour;
 
+	public static void LoadMenu()
+	{
+		LoadScene(Scene.PlayerLobby);
+	}
+	
 	public static void LoadScene(Scene sceneEnum)
 	{
 		_onLoaderCallbackAction = () =>

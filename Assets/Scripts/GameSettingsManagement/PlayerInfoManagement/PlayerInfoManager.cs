@@ -39,9 +39,13 @@ namespace GameSettingsManagement.PlayerInfoManagement
             List<PlayerInfo> tempPlayerList = new List<PlayerInfo>(players);
             List<PlayerInfo> scoreBoardPlayerList = new List<PlayerInfo>();
 
-            for (int i = 0; i < 4; i++)
+            var playerCount = tempPlayerList.Count;
+            for (int i = 0; i < playerCount; i++)
             {
-                scoreBoardPlayerList.Add(FindPlayerWithHighestScore(tempPlayerList));
+                var player = FindPlayerWithHighestScore(tempPlayerList);
+
+                scoreBoardPlayerList.Add(player);
+                tempPlayerList.Remove(player);
             }
 
             return scoreBoardPlayerList;

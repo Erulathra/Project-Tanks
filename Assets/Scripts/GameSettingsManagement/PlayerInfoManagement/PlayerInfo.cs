@@ -1,4 +1,5 @@
 using System;
+using PlayerManagement;
 using UnityEngine;
 
 namespace GameSettingsManagement.PlayerInfoManagement

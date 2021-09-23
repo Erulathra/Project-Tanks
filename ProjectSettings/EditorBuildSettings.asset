@@ -12,6 +12,9 @@ EditorBuildSettings:
     path: Assets/Scenes/LoadingScene.unity
     guid: e7410dce1c744fc4082032ed1153dae0
   - enabled: 1
+    path: Assets/Scenes/StageScene.unity
+    guid: c6d98b2b3a13774469eaba82d86f7de0
+  - enabled: 1
     path: Assets/Scenes/Maps/DustOne.unity
     guid: f7bd4d787d0a880458232fdd1409dea1
   - enabled: 1
