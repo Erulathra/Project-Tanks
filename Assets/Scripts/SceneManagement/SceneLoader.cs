@@ -24,8 +24,22 @@ public static class SceneLoader
 
 	public static void LoadMenu()
 	{
-		LoadScene(Scene.PlayerLobby);
+		TryLoadSceneWithTransition(Scene.PlayerLobby);
 	}
+
+	public static void TryLoadSceneWithTransition(Scene sceneEnum)
+	{
+		var transitionGameObject = GameObject.Find("SceneTransition");
+		if(transitionGameObject == null) LoadScene(sceneEnum);
+		LoadSceneWithTransition(transitionGameObject, sceneEnum);
+	}
+	
+	public static void LoadSceneWithTransition(GameObject transitionGameObject, Scene sceneEnum)
+	{
+		var transitionScrip = transitionGameObject.GetComponent<ISceneTransition>();
+		transitionScrip.StartCoroutine(transitionScrip.DimToBlack(() => LoadScene(sceneEnum)));
+	}
+	
 	
 	public static void LoadScene(Scene sceneEnum)
 	{

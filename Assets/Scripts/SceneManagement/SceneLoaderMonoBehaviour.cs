@@ -13,4 +13,8 @@ public class SceneLoaderMonoBehaviour : MonoBehaviour
 	{
 		SceneLoader.LoadScene(sceneEnum);
 	}
+	public static void LoadSceneWithTransition(SceneLoader.Scene sceneEnum)
+	{
+		SceneLoader.TryLoadSceneWithTransition(sceneEnum);
+	}
 }

@@ -28,7 +28,7 @@ public class RoundManager : MonoBehaviour
         var playerWithHighestScore = playerInfoManager.FindPlayerWithHighestScore();
         if(playerWithHighestScore.score >= requiredScore)
         {
-            SceneLoader.LoadScene(stageScene);
+            SceneLoader.TryLoadSceneWithTransition(stageScene);
             return;
         }
         mapManager.LoadNextMap();

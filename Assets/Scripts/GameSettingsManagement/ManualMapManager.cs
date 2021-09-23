@@ -15,14 +15,14 @@ public class ManualMapManager : MonoBehaviour, IMapManager
     public void LoadFirstMap()
     {
         actualMap = 0;
-        SceneLoader.LoadScene(maps[actualMap]);
+        SceneLoader.TryLoadSceneWithTransition(maps[actualMap]);
     }
 
     public void LoadNextMap()
     {
         var nextMapIndex = GetNextMapIndex();
         actualMap = nextMapIndex;
-        SceneLoader.LoadScene(maps[nextMapIndex]);
+        SceneLoader.TryLoadSceneWithTransition(maps[nextMapIndex]);
     }
 
     private int GetNextMapIndex()
