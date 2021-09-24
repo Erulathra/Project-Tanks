@@ -202,4 +202,4 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   panel: {fileID: 301270639922471468}
-  dimSpeed: 2
+  dimSpeed: 5

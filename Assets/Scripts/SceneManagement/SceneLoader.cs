@@ -31,6 +31,7 @@ public static class SceneLoader
 	{
 		var transitionGameObject = GameObject.Find("SceneTransition");
 		if(transitionGameObject == null) LoadScene(sceneEnum);
+		
 		LoadSceneWithTransition(transitionGameObject, sceneEnum);
 	}
 	

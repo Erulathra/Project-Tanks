@@ -1,0 +1,17 @@
+{
+    "name": "PauseMenu",
+    "rootNamespace": "",
+    "references": [
+        "GUID:130209257d41e754fb395b944796c00d",
+        "GUID:75469ad4d38634e559750d17036d5f7c"
+    ],
+    "includePlatforms": [],
+    "excludePlatforms": [],
+    "allowUnsafeCode": false,
+    "overrideReferences": false,
+    "precompiledReferences": [],
+    "autoReferenced": true,
+    "defineConstraints": [],
+    "versionDefines": [],
+    "noEngineReferences": false
+}
