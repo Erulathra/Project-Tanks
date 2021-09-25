@@ -6,7 +6,7 @@ public class SceneLoaderMonoBehaviour : MonoBehaviour
 {
 	public void LoadMenu()
 	{
-		SceneLoader.LoadMenu(); 
+		SceneLoader.LoadMenuWithTransition(); 
 	}
 
 	public static void LoadScene(SceneLoader.Scene sceneEnum)

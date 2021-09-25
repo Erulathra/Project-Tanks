@@ -35,6 +35,18 @@ namespace PlayerManagement
 			DontDestroyOnLoad(gameObject);
 			PlayersInput = new PlayerInput[4];
 		}
+
+		public int GetActivePlayers()
+		{
+			int activePlayers = 0;
+			foreach (var input in PlayersInput)
+			{
+				if(input.playerControllerType == PlayerControllerType.None) continue;
+				activePlayers++;
+			}
+
+			return activePlayers;
+		}
 		
 		public void AddPlayerWhenItWasNotAdded(InputDevice device, PlayerControllerType type)
 		{
@@ -83,5 +95,7 @@ namespace PlayerManagement
 
 			return false;
 		}
+		
+		
 	}
 }

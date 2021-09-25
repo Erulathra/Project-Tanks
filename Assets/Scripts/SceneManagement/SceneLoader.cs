@@ -22,9 +22,13 @@ public static class SceneLoader
 	private static Action _onLoaderCallbackAction;
 	private static LoadingMonoBehaviour loadingMonoBehaviour;
 
-	public static void LoadMenu()
+	public static void LoadMenuWithTransition()
 	{
 		TryLoadSceneWithTransition(Scene.PlayerLobby);
+	}
+	public static void LoadMenu()
+	{
+		LoadScene(Scene.PlayerLobby);
 	}
 
 	public static void TryLoadSceneWithTransition(Scene sceneEnum)

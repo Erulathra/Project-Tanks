@@ -17,6 +17,7 @@ namespace GameSettingsManagement.PlayerInfoManagement
         
         public void UpdatePlayersInfo()
         {
+            players.Clear();
             var playersInput = GetComponent<PlayerInputDeviceInfo>();
             IPlayerInfoGetter infoGetter = new ConstantPlayerInfoGetter();
             
