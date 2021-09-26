@@ -1,3 +1,4 @@
+using System.Collections.Generic;
 using Entities_Scripts.ExplosionScripts;
 using Pool;
 using UnityEngine;
@@ -15,6 +16,8 @@ namespace Tank.Scripts.Shooting.Shell
 		private IShellCollisionsHandler shellCollisionsHandler;
 		public ObjectPoolManager ExplosionPool { get; set; }
 		
+		
+
 		private void Awake()
 		{
 			shellCollisionsHandler = GetComponent<IShellCollisionsHandler>();
@@ -25,6 +28,11 @@ namespace Tank.Scripts.Shooting.Shell
 		private void Update()
 		{
 			explodeTimer.Update(Time.deltaTime);
+		}
+
+		public void SetIgnoringObjects(List<GameObject> ignoringGameObjects)
+		{
+			shellCollisionsHandler.SetIgnoringGameObjects(ignoringGameObjects);
 		}
 
 		private void OnEnable()
@@ -78,6 +86,7 @@ namespace Tank.Scripts.Shooting.Shell
 			var objectTransform = transform;
 			objectTransform.position = Vector3.zero;
 			objectTransform.eulerAngles = Vector3.zero;
+			shellCollisionsHandler.SetIgnoringGameObjects(new List<GameObject>());
 		}
 	}
 }

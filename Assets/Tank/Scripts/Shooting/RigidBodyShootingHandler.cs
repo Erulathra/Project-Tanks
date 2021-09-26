@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using Entities_Scripts.ExplosionScripts;
 using Pool;
 using Tank.Scripts.Shooting;
@@ -55,6 +56,8 @@ namespace Tank.Scripts
 		{
 			shell.transform.position = muzzle.position;
 			shell.transform.rotation = tower.rotation;
+			var ignoringGameObjects = new List<GameObject> { gameObject };
+			shell.GetComponent<RigidbodyShellScript>().SetIgnoringObjects(ignoringGameObjects);
 			shell.SetActive(true);
 		}
 

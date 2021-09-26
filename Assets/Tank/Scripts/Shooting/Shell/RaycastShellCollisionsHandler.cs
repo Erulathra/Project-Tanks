@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using UnityEngine;
 
 namespace Tank.Scripts
@@ -13,9 +14,16 @@ namespace Tank.Scripts
 		private RaycastHit hit;
 		private Vector3 hitPoint;
 		
+		public List<GameObject> ignoringGameObjects;
+		
 		public Vector3 GetHitPoint()
 		{
 			return hitPoint;
+		}
+
+		public void SetIgnoringGameObjects(List<GameObject> ignoringGameObjects)
+		{
+			this.ignoringGameObjects = ignoringGameObjects;
 		}
 
 		private void OnEnable()
@@ -44,7 +52,13 @@ namespace Tank.Scripts
 
 		private bool CheckCollision()
 		{
-			return Physics.Linecast(previousPosition, actualPosition, out hit);
+			bool isCollidedObjectAIgnoredObject = false;
+			bool wasCollided = Physics.Linecast(previousPosition, actualPosition, out hit);
+			if (wasCollided)
+			{
+				isCollidedObjectAIgnoredObject = ignoringGameObjects.Contains(hit.collider.gameObject);
+			}
+			return wasCollided && !isCollidedObjectAIgnoredObject;
 		}
 
 		
