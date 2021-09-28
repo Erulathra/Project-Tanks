@@ -9,10 +9,13 @@ public static class SceneLoader
 	[Serializable]
 	public enum Scene
 	{
+		MainMenu,
 		PlayerLobby,
 		LoadingScene,
 		DustOne,
 		DustTwo,
+		TownOne,
+		TownTwo,
 		StageScene,
 	}
 
@@ -22,13 +25,15 @@ public static class SceneLoader
 	private static Action _onLoaderCallbackAction;
 	private static LoadingMonoBehaviour loadingMonoBehaviour;
 
+	private const SceneLoader.Scene MainMenuScene = Scene.MainMenu;
+	
 	public static void LoadMenuWithTransition()
 	{
-		TryLoadSceneWithTransition(Scene.PlayerLobby);
+		TryLoadSceneWithTransition(MainMenuScene);
 	}
 	public static void LoadMenu()
 	{
-		LoadScene(Scene.PlayerLobby);
+		LoadScene(MainMenuScene);
 	}
 
 	public static void TryLoadSceneWithTransition(Scene sceneEnum)
@@ -39,7 +44,7 @@ public static class SceneLoader
 		LoadSceneWithTransition(transitionGameObject, sceneEnum);
 	}
 	
-	public static void LoadSceneWithTransition(GameObject transitionGameObject, Scene sceneEnum)
+	private static void LoadSceneWithTransition(GameObject transitionGameObject, Scene sceneEnum)
 	{
 		var transitionScrip = transitionGameObject.GetComponent<ISceneTransition>();
 		transitionScrip.StartCoroutine(transitionScrip.DimToBlack(() => LoadScene(sceneEnum)));

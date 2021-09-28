@@ -796,7 +796,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.7784911, y: 1}
+    m_SensorSize: {x: 2.1348314, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -1503,7 +1503,19 @@ MonoBehaviour:
   m_TargetGraphic: {fileID: 438729123}
   m_OnClick:
     m_PersistentCalls:
-      m_Calls: []
+      m_Calls:
+      - m_Target: {fileID: 1029470255}
+        m_TargetAssemblyTypeName: Lobby.LobbyManager, Lobby
+        m_MethodName: ReturnToMenu
+        m_Mode: 1
+        m_Arguments:
+          m_ObjectArgument: {fileID: 0}
+          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
+          m_IntArgument: 0
+          m_FloatArgument: 0
+          m_StringArgument: 
+          m_BoolArgument: 0
+        m_CallState: 2
 --- !u!114 &438729123
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -2436,7 +2448,7 @@ Camera:
   far clip plane: 1000
   field of view: 90
   orthographic: 1
-  orthographic size: 8.434115
+  orthographic size: 8.016218
   m_Depth: -1
   m_CullingMask:
     serializedVersion: 2
@@ -3942,7 +3954,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 4852cb9454f898746a5078c65e926722, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  maps: 0200000003000000
+  maps: 03000000040000000500000006000000
 --- !u!114 &1172815621
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -3955,7 +3967,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: b0f14028812bbd642b940840a959c754, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  stageScene: 4
+  stageScene: 7
   requiredScore: 5
 --- !u!1001 &1240647478
 PrefabInstance:

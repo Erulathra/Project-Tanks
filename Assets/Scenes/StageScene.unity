@@ -1399,7 +1399,7 @@ MonoBehaviour:
     ModeOverride: 0
     LensShift: {x: 0, y: 0}
     GateFit: 2
-    m_SensorSize: {x: 1.668239, y: 1}
+    m_SensorSize: {x: 1.3333334, y: 1}
     Iso: 200
     ShutterSpeed: 0.005
     Aperture: 16
@@ -4413,7 +4413,7 @@ MonoBehaviour:
   m_ShadowResolution:
     m_Override: 512
     m_UseOverride: 0
-    m_Level: 2
+    m_Level: 3
   m_ShadowDimmer: 0.716
   m_VolumetricShadowDimmer: 1
   m_ShadowFadeDistance: 10000
